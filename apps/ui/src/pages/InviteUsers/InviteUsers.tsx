@@ -3,19 +3,14 @@ import { useNavigate } from 'react-router-dom'
 
 import { ButtonPrimary } from 'components/Button/Button'
 import Button from 'share-ui/components/Button/Button'
-import Add from 'share-ui/components/Icon/Icons/components/Add'
+
 import ComponentsWrapper from 'components/ComponentsWrapper/ComponentsWrapper'
 import { StyledTableWrapper } from 'plugins/contact/pages/Contact/Contacts'
 import Table from 'components/Table'
-import {
-  StyledHeaderGroup,
-  StyledSectionTitle,
-  StyledSectionWrapper,
-} from 'pages/Home/homeStyle.css'
+import { StyledHeaderGroup, StyledSectionWrapper } from 'pages/Home/homeStyle.css'
 import useInviteUsers from './useInviteUsers'
 import SharedAccess from './SharedAccess'
 
-import ListHeader from 'routes/components/ListHeader'
 import TabList from 'share-ui/components/Tabs/TabList/TabList'
 import Tab from 'share-ui/components/Tabs/Tab/Tab'
 import TabsContext from 'share-ui/components/Tabs/TabsContext/TabsContext'
