@@ -13,22 +13,11 @@ import Session from 'share-ui/components/Icon/Icons/components/Teams'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 import includes from 'lodash/includes'
-import {
-  StyledGamesIcon,
-  StyledBasicIcon,
-  StyledRobotIcon,
-  StyledSearchOutlineIcon,
-  StyledValueOutlineIcon,
-} from 'components/ChatSwitcher/ChatSwitcher'
+import { StyledValueOutlineIcon } from 'components/ChatSwitcher/ChatSwitcher'
 
-import Typography from 'share-ui/components/typography/Typography'
-import TypographySecondary from 'components/Typography/Secondary'
 import { useGetAccountModule } from 'utils/useGetAccountModule'
 import { t } from 'i18next'
-import {
-  TypographySizes,
-  TypographyTypes,
-} from 'share-ui/components/typography/TypographyConstants'
+
 import AvatarDropDown from 'components/AvatarDropDown'
 import { useDomainConfig } from 'utils/useDomainConfig'
 import Tooltip from 'share-ui/components/Tooltip/Tooltip'
@@ -37,12 +26,12 @@ import Integrations from 'share-ui/components/Icon/Icons/components/integrations
 import FineTuning from 'share-ui/components/Icon/Icons/components/FineTuning'
 // eslint-disable-next-line import/no-named-as-default
 import Cloud from 'share-ui/components/Icon/Icons/components/Cloud'
-import { API, Payments, Person, Teams } from 'share-ui/components/Icon/Icons'
+import { API, Wallet } from 'share-ui/components/Icon/Icons'
 
 import ModeSwitcher from 'components/ModeSwitcher'
 import { useAppModeContext } from 'context/AppModeContext'
 
-const MainNavigation = ({ user }: { user: any }) => {
+const MainNavigation = () => {
   const { computeMode, subnetMode } = useAppModeContext()
 
   const domainEnv = import.meta.env
@@ -71,12 +60,12 @@ const MainNavigation = ({ user }: { user: any }) => {
   const isModel = getModelModules('active')
   const isIntegration = getIntegrationModules('active')
   // const isToolkit = getToolkitModules()
-  const isDiscover = getDiscoveryModules()
+  // const isDiscover = getDiscoveryModules()
   const isDatasource = getDatasourceModules()
-  const isSchedule = getScheduleModules()
-  const isContact = getContactModules()
+  // const isSchedule = getScheduleModules()
+  // const isContact = getContactModules()
   // const isGroup = getGroupModules()
-  const isSession = getSessionModules()
+  // const isSession = getSessionModules()
 
   // const { chat, home, datasource, models, discovery, schedule, toolkits, sessions } = moduleNames
 
@@ -236,7 +225,7 @@ const MainNavigation = ({ user }: { user: any }) => {
             isActive={includes(active, 'billing')}
             onClick={() => onHandleClick('/billing')}
           >
-            <StyledPaymentsIcon />
+            <StyledBillingIcon />
             {includes(active, 'billing') && <StyledCorner />}
           </StyledLi>
         </Tooltip>
@@ -453,12 +442,8 @@ const StyledAPIIcon = styled(API)`
     fill: ${({ theme }) => theme.body.iconColor};
   }
 `
-const StyledTeamsIcon = styled(Teams)`
-  path {
-    fill: ${({ theme }) => theme.body.iconColor};
-  }
-`
-const StyledPaymentsIcon = styled(Payments)`
+
+const StyledBillingIcon = styled(Wallet)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
   }
