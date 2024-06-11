@@ -391,7 +391,7 @@ const Route = () => {
                 />
               </Router>
 
-              <Router path='api-key' element={<MainRouteLayout />} key={document.location.href}>
+              <Router path='api-key' key={document.location.href}>
                 <Router index element={<ApiKeys />} key={document.location.href} />
                 <Router
                   path={'create-api-key'}
@@ -405,7 +405,7 @@ const Route = () => {
                 />
               </Router>
 
-              <Router path='invite-user' element={<MainRouteLayout />} key={document.location.href}>
+              <Router path='invite-user' key={document.location.href}>
                 <Router index element={<InviteUsers />} key={document.location.href} />
                 <Router
                   path={'invite'}

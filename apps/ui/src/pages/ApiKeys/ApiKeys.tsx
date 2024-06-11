@@ -18,11 +18,13 @@ import {
   StyledHeaderGroup,
   StyledSectionDescription,
   StyledSectionTitle,
-  StyledSectionWrapper,
 } from 'pages/Home/homeStyle.css'
-import ComponentsWrapper from 'components/ComponentsWrapper/ComponentsWrapper'
+
 import { openLinkTab } from 'components/HeaderButtons/HeaderButtons'
-import { StyledTableWrapper } from 'plugins/contact/pages/Contact/Contacts'
+
+import { StyledChatWrapper, StyledContainer, StyledMainWrapper } from 'routes/ChatRouteLayout'
+import { StyledAppContainer } from 'components/Layout/LayoutStyle'
+import { StyledTableWrapper } from 'pages/Billing/panels/Transactions'
 
 const ApiKeys = () => {
   const { t } = useTranslation()
@@ -31,45 +33,44 @@ const ApiKeys = () => {
   const navigate = useNavigate()
 
   return (
-    <StyledSectionWrapper>
-      <StyledHeaderGroup className='header_group'>
-        <div>
-          <StyledSectionTitle>API Keys</StyledSectionTitle>
-          <StyledSectionDescription>
-            <StyledTypography>
-              {t('api-keys-authenticate')}
-              <StyledTypographyWrapper>
-                <ButtonTertiary
-                  onClick={() => openLinkTab(import.meta.env.REACT_APP_API_KEYS_LINK)}
-                  size={Button.sizes?.SMALL}
-                >
-                  <TypographyTertiary
-                    value={t('learn-more')}
-                    type={Typography.types.L}
-                    size={Typography.sizes.sm}
-                  />
-                </ButtonTertiary>
-              </StyledTypographyWrapper>
-            </StyledTypography>
-          </StyledSectionDescription>
-        </div>
+    <StyledAppContainer>
+      <StyledContainer>
+        <StyledMainWrapper>
+          <StyledChatWrapper>
+            <StyledHeaderGroup className='header_group'>
+              <div>
+                <StyledSectionTitle>API Keys</StyledSectionTitle>
+                <StyledSectionDescription>
+                  <StyledTypography>
+                    {t('api-keys-authenticate')}
+                    <StyledTypographyWrapper>
+                      <ButtonTertiary
+                        onClick={() => openLinkTab(import.meta.env.REACT_APP_API_KEYS_LINK)}
+                        size={Button.sizes?.SMALL}
+                      >
+                        <TypographyTertiary value={t('learn-more')} size={'small'} />
+                      </ButtonTertiary>
+                    </StyledTypographyWrapper>
+                  </StyledTypography>
+                </StyledSectionDescription>
+              </div>
 
-        <ButtonPrimary
-          onClick={() => navigate('/api-key/create-api-key')}
-          size={Button.sizes?.MEDIUM}
-        >
-          {t('create-api-key')}
-        </ButtonPrimary>
-      </StyledHeaderGroup>
+              <ButtonPrimary
+                onClick={() => navigate('/api-key/create-api-key')}
+                size={Button.sizes?.MEDIUM}
+              >
+                {t('create-api-key')}
+              </ButtonPrimary>
+            </StyledHeaderGroup>
+            <StyledTableWrapper>
+              <Table columns={columnConfig} data={apiKeys || []} />
+            </StyledTableWrapper>
 
-      <ComponentsWrapper noPadding>
-        <StyledTableWrapper>
-          <Table columns={columnConfig} data={apiKeys || []} />
-        </StyledTableWrapper>
-      </ComponentsWrapper>
-
-      <ShowApiKeyModal />
-    </StyledSectionWrapper>
+            <ShowApiKeyModal />
+          </StyledChatWrapper>
+        </StyledMainWrapper>
+      </StyledContainer>
+    </StyledAppContainer>
   )
 }
 

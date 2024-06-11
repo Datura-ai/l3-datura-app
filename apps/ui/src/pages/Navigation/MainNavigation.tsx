@@ -217,6 +217,7 @@ const MainNavigation = () => {
             onClick={() => onHandleClick('/api-key')}
           >
             <StyledAPIIcon size={40} />
+            {includes(active, 'api-key') && <StyledCorner />}
           </StyledLi>
         </Tooltip>
 
