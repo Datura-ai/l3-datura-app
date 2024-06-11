@@ -210,7 +210,7 @@ const MainNavigation = ({ user }: { user: any }) => {
           </Tooltip>
         )}
 
-        {isModel && (
+        {!isDatura && isModel && (
           <Tooltip content={t('model')} position={Tooltip.positions.LEFT}>
             <StyledLi
               isActive={includes(active, 'models')}
