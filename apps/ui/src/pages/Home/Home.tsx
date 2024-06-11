@@ -111,18 +111,6 @@ const Home = () => {
                       </StyledCardsWrapper>
                     </ComponentsWrapper>
                   </StyledSectionWrapper>
-
-                  <StyledSectionWrapper>
-                    <StyledHeaderGroup>
-                      <StyledMainHeaderWrapper>
-                        <HeadingPrimary type={Heading.types?.h1} size='xss' value={`SDKs`} />
-                      </StyledMainHeaderWrapper>
-                    </StyledHeaderGroup>
-
-                    <ComponentsWrapper>
-                      <SDKs />
-                    </ComponentsWrapper>
-                  </StyledSectionWrapper>
                 </>
               )}
 
@@ -161,6 +149,18 @@ const Home = () => {
 
                     <ComponentsWrapper>
                       <LogsPanel />
+                    </ComponentsWrapper>
+                  </StyledSectionWrapper>
+
+                  <StyledSectionWrapper>
+                    <StyledHeaderGroup>
+                      <StyledMainHeaderWrapper>
+                        <HeadingPrimary type={Heading.types?.h1} size='xss' value={`SDKs`} />
+                      </StyledMainHeaderWrapper>
+                    </StyledHeaderGroup>
+
+                    <ComponentsWrapper>
+                      <SDKs />
                     </ComponentsWrapper>
                   </StyledSectionWrapper>
                 </>
