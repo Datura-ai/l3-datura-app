@@ -72,11 +72,12 @@ const expandedStyles = `
   height: 50px;
   border-radius: 10px;
   margin-left: 200px; 
+  border-color: #000
   `
 
 const StyledRoot = styled.div<{ isOpen: boolean }>`
   background: ${({ theme }) => theme.body.cardBgColor};
-  border: ${({ theme }) => theme.body.border};
+  border: 2px solid transparent;
 
   width: 50px;
   height: 50px;
@@ -84,7 +85,7 @@ const StyledRoot = styled.div<{ isOpen: boolean }>`
   z-index: 10203000;
 
   transition: width 0.1s ease, height 0.1s ease, border-radius 0s ease, margin-left 0.1s ease;
-  border-radius: 10px;
+  border-radius: 100px;
 
   ${({ isOpen }) => isOpen && expandedStyles}
 `
