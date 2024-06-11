@@ -485,14 +485,13 @@ export const StyledMainWrapper = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
+
+  gap: 12px;
   /* max-width: 1400px; */
 `
 export const StyledChatWrapper = styled.div`
   height: 100%;
   width: 100%;
-  /* max-width: 900px; */
-
-  padding-left: 24px;
 
   display: flex;
   flex-direction: column;
