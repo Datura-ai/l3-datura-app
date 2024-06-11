@@ -231,15 +231,6 @@ const MainNavigation = ({ user }: { user: any }) => {
           </StyledLi>
         </Tooltip>
 
-        <Tooltip content={t('Teams')} position={Tooltip.positions.LEFT}>
-          <StyledLi
-            isActive={includes(active, 'invite-user')}
-            onClick={() => onHandleClick('/invite-user')}
-          >
-            <StyledTeamsIcon />
-          </StyledLi>
-        </Tooltip>
-
         <Tooltip content={t('Billing')} position={Tooltip.positions.LEFT}>
           <StyledLi
             isActive={includes(active, 'billing')}
