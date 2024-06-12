@@ -1,4 +1,7 @@
 import Table from 'components/Table'
+import Button from 'share-ui/components/Button/Button'
+import { Download } from 'share-ui/components/Icon/Icons'
+
 import styled from 'styled-components'
 
 const Transactions = () => {
@@ -22,22 +25,38 @@ const base = [
   {
     Header: 'Time',
     accessor: 'time',
+    minWidth: 100,
+    width: 200,
   },
   {
     Header: 'Type',
     accessor: 'type',
+    minWidth: 100,
+    width: 200,
   },
   {
     Header: 'Platform',
     accessor: 'platform',
+    minWidth: 50,
+    width: 100,
   },
   {
     Header: 'Amount',
     accessor: 'amount',
+    minWidth: 50,
+    width: 100,
   },
   {
     Header: 'Invoice',
     accessor: 'invoice',
+    minWidth: 50,
+    width: 50,
+
+    Cell: () => (
+      <StyledDownloadWrapper>
+        <StyledDownloadIcon />
+      </StyledDownloadWrapper>
+    ),
   },
 ]
 
@@ -53,3 +72,16 @@ const data = [
   { time: '11 Jun 2024 16:50', type: 'RELOAD', platform: 'STRIPE', amount: '$500', invoice: '' },
   { time: '12 Jun 2024 17:35', type: 'RELOAD', platform: 'STRIPE', amount: '$100', invoice: '' },
 ]
+
+const StyledDownloadIcon = styled(Download)`
+  path {
+    fill: ${({ theme }) => theme.body.iconColor};
+  }
+`
+const StyledDownloadWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+
+  cursor: pointer;
+`
