@@ -112,6 +112,7 @@ const General = () => {
 export default General
 
 const StyledRoot = styled.div`
+  margin-top: 30px;
   padding-right: 24px;
 
   display: flex;

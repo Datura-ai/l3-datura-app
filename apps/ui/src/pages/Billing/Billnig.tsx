@@ -15,6 +15,7 @@ import TabPanels from 'share-ui/components/Tabs/TabPanels/TabPanels'
 import TabPanel from 'share-ui/components/Tabs/TabPanel/TabPanel'
 import General from './panels/General'
 import Explorer from './panels/Explorer'
+import Transactions from './panels/Transactions'
 
 const Billing = () => {
   const [activeTab, setActiveTab] = useState(0)
@@ -29,7 +30,8 @@ const Billing = () => {
           <StyledChatWrapper>
             <TabList size='small' activeTabId={activeTab} noBorder>
               <Tab onClick={() => handleTabClick(0)}>General</Tab>
-              <Tab onClick={() => handleTabClick(1)}>Explorer</Tab>
+              <Tab onClick={() => handleTabClick(1)}>Transactions</Tab>
+              <Tab onClick={() => handleTabClick(2)}>Explorer</Tab>
             </TabList>
 
             <StyledHorizontalDivider />
@@ -38,6 +40,10 @@ const Billing = () => {
               <TabPanels noAnimation>
                 <TabPanel>
                   <General />
+                </TabPanel>
+
+                <TabPanel>
+                  <Transactions />
                 </TabPanel>
 
                 <TabPanel>
