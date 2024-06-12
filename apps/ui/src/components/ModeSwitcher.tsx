@@ -46,7 +46,7 @@ const ModeSwitcher = () => {
                   <StyledImg src={option.icon} />
 
                   <TypographyPrimary value={option.name} size={'small'} semiBold />
-                  {mode === option && <StyledCheck />}
+                  {mode.type === option.type && <StyledCheck />}
                 </StyledDropDownMenuItem>
               )
             })}
