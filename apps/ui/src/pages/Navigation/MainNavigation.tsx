@@ -401,14 +401,6 @@ const StyledBottomSection = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 10px;
-
-  span {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 16px;
-    /* color: rgba(255, 255, 255, 0.2); */
-  }
 `
 const StyledInnerWrapper = styled.div`
   display: flex;
