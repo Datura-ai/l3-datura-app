@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 import { useFormik } from 'formik'
-import { useCreateSecretService } from 'services/secret/useCreateSecret'
+import { useCreateSecretService } from 'services/secret/useSecretService'
 import { SecretInput } from 'types/secret'
 import { useContext } from 'react'
 import { ToastContext } from 'contexts'
