@@ -2,7 +2,7 @@ import TypographyPrimary from './Typography/Primary'
 
 import { Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-menu'
 import { useAppModeContext } from 'context/AppModeContext'
-import { Check } from 'share-ui/components/Icon/Icons'
+import { Check, Switcher } from 'share-ui/components/Icon/Icons'
 import styled from 'styled-components'
 import { StyledAddIcon } from 'pages/Navigation/MainNavigation'
 import { useEffect, useState } from 'react'
@@ -29,7 +29,7 @@ const ModeSwitcher = () => {
       <StyledDropDownMenuRoot onOpenChange={setDropdownOpen}>
         <StyledSwitcher>
           <StyledDropDownMenuTrigger>
-            <StyledImg src={mode.icon} large />
+            <Switcher size={32} />
 
             {showDropdownValue && (
               <StyledDropdownValue>
@@ -156,7 +156,7 @@ const StyledDropDownMenuTrigger = styled(Trigger)`
   width: 100%;
   height: 100%;
 
-  padding-left: 5px;
+  padding-left: 7px;
 `
 const StyledSwitcher = styled.div`
   width: 100%;
