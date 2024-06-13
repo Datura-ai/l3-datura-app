@@ -1,0 +1,13 @@
+mutation deleteTemplate($template_id: template_id!) @api(name: ai) {
+  deleteTemplate(template_id: $template_id)
+    @rest(
+      type: "Template"
+      path: "/template/{args.template_id}"
+      method: "DELETE"
+      bodyKey: "input"
+      endpoint: "ai"
+    ) {
+    success
+    message
+  }
+}
