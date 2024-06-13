@@ -26,7 +26,7 @@ import Integrations from 'share-ui/components/Icon/Icons/components/integrations
 import FineTuning from 'share-ui/components/Icon/Icons/components/FineTuning'
 // eslint-disable-next-line import/no-named-as-default
 import Cloud from 'share-ui/components/Icon/Icons/components/Cloud'
-import { API, AddOutline, Wallet } from 'share-ui/components/Icon/Icons'
+import { API, AddOutline, DollarOutline } from 'share-ui/components/Icon/Icons'
 
 import ModeSwitcher from 'components/ModeSwitcher'
 import { useAppModeContext } from 'context/AppModeContext'
@@ -434,7 +434,7 @@ const StyledAPIIcon = styled(API)`
   }
 `
 
-const StyledBillingIcon = styled(Wallet)`
+const StyledBillingIcon = styled(DollarOutline)`
   path {
     fill: ${({ theme }) => theme.body.iconColor};
   }
