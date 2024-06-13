@@ -1,8 +1,10 @@
 import { useQuery, useMutation } from '@apollo/client'
 import { ToastContext } from 'contexts'
 import { useContext } from 'react'
-import createSecretGql from 'gql/secret/createSecret.gql'
 import { SecretInput } from 'types/secret'
+import createSecretGql from 'gql/secret/createSecret.gql'
+import getSecretsGql from 'gql/secret/getSecrets.gql'
+import secretByIdGql from 'gql/secret/secretById.gql'
 
 export const useCreateSecretService = () => {
     const { setToast } = useContext(ToastContext)
@@ -21,7 +23,7 @@ export const useCreateSecretService = () => {
             return createSecret
         } catch (error) {
             setToast({
-                message: error?.message ?? 'Error creating user access',
+                message: error?.message ?? 'Error creating Secret',
                 type: 'negative',
                 open: true,
             })
@@ -30,4 +32,30 @@ export const useCreateSecretService = () => {
     }
 
     return { createSecret, loading }
+}
+
+export const useGetSecrets = () => {
+    const { data, error, loading, refetch } = useQuery(getSecretsGql, {
+        fetchPolicy: 'cache-first',
+    })
+
+    return {
+        data: data?.getSecrets || [],
+        error,
+        loading,
+        refetch,
+    }
+}
+
+export const useGetSecretById = () => {
+    const { data, error, loading, refetch } = useQuery(secretByIdGql, {
+        fetchPolicy: 'cache-first',
+    })
+
+    return {
+        data: data?.secretById || [],
+        error,
+        loading,
+        refetch,
+    }
 }
