@@ -18,7 +18,7 @@ from typings.template import (
     TemplateVisibilityEnum
 )
 from  exceptions import TemplateNotFoundException
-from typings.template import TemplateInput 
+from typings.template import TemplateInput
 
 
 class TemplateModel(BaseModel):
