@@ -7,11 +7,6 @@ import { ButtonPrimary } from 'components/Button/Button'
 import TypographySecondary from 'components/Typography/Secondary'
 import { Option, useAppModeContext } from 'context/AppModeContext'
 
-const TEMP_DATA = [
-  { value: 'compute', label: 'Compute' },
-  { value: 'subnet_api', label: 'Subnet API' },
-]
-
 const SelectType = ({ nextStep }: { nextStep: () => void }) => {
   const { options } = useAppModeContext()
   const [pickedRole, setPickedRole] = useState<Option>(options[0])
@@ -100,7 +95,7 @@ const StyledCardsWrapper = styled.div`
   flex-direction: column;
   gap: 20px;
 `
-const StyledHeader = styled.div`
+export const StyledHeader = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;

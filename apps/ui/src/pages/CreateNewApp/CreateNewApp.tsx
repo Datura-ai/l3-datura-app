@@ -8,8 +8,9 @@ import {
 } from 'routes/ChatRouteLayout'
 import styled from 'styled-components'
 import SelectType from './steps/SelectType'
-import SDKs from 'pages/Subnets/SDKs'
-import TextField from 'share-ui/components/TextField/TextField'
+
+import { ButtonPrimary } from 'components/Button/Button'
+import Configurations from './steps/Configurations'
 
 const CreateNewApp = () => {
   const [step, setStep] = useState(1)
@@ -23,9 +24,13 @@ const CreateNewApp = () => {
         return <SelectType nextStep={nextStep} />
       case 2:
         return (
-          <StyledConfiguration>
-            <TextField />
-          </StyledConfiguration>
+          <>
+            <Configurations />
+            <StyledButtonsWrapper>
+              <ButtonPrimary onClick={prevStep}>Back</ButtonPrimary>
+              <ButtonPrimary onClick={nextStep}>Next</ButtonPrimary>
+            </StyledButtonsWrapper>
+          </>
         )
       case 3:
         return <>HERE IS DA BODY</>
@@ -48,7 +53,7 @@ const CreateNewApp = () => {
                 <StyledDividerLine />
 
                 <StyledButton picked={step === 2} onClick={() => setStep(2)}>
-                  ConFiguration
+                  Configuration
                 </StyledButton>
                 <StyledDividerLine />
 
@@ -61,11 +66,11 @@ const CreateNewApp = () => {
 
               <StyledBody>{renderStep()}</StyledBody>
 
-              <StyledButtonsWrapper>
+              {/* <StyledButtonsWrapper>
                 {step > 1 && <button onClick={prevStep}>Back</button>}
                 {step < 3 && <button onClick={nextStep}>Next</button>}
                 {step === 3 && <button onClick={() => alert('Process completed!')}>Finish</button>}
-              </StyledButtonsWrapper>
+              </StyledButtonsWrapper> */}
             </StyledRoot>
           </StyledChatWrapper>
         </StyledMainWrapper>
@@ -107,11 +112,16 @@ const StyledBody = styled.div`
 const StyledButtonsWrapper = styled.div`
   width: 100%;
 
-  height: 50px;
-
   display: flex;
   justify-content: center;
-  gap: 50px;
+  gap: 10px;
+
+  margin-top: auto;
+
+  margin-top: 50px;
+  padding: 10px 0;
+
+  /* background: ${({ theme }) => theme.body.componentsWrapperBg}; */
 `
 const StyledButton = styled.button<{ picked: boolean }>`
   opacity: 0.6;
@@ -122,16 +132,4 @@ const StyledDividerLine = styled.div`
   width: 50px;
   height: 1px;
   background-color: #dbdbdb;
-`
-const StyledConfiguration = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  background-color: red;
-  height: 100%;
-  width: 100%;
-  max-width: 800px;
-
-  padding: 20px;
 `
