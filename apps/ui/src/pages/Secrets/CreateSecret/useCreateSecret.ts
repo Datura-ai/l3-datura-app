@@ -48,7 +48,7 @@ const useCreateSecret = () => {
             })
 
             if(result.success) {
-                navigate(`/secrets`)
+                navigate(`/secrets`, { state: { need_refetch: true } })
             }
         }
 
