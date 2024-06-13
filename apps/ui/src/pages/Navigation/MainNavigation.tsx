@@ -26,10 +26,11 @@ import Integrations from 'share-ui/components/Icon/Icons/components/integrations
 import FineTuning from 'share-ui/components/Icon/Icons/components/FineTuning'
 // eslint-disable-next-line import/no-named-as-default
 import Cloud from 'share-ui/components/Icon/Icons/components/Cloud'
-import { API, AddOutline, DollarOutline } from 'share-ui/components/Icon/Icons'
+import { AddOutline, DollarOutline } from 'share-ui/components/Icon/Icons'
 
 import ModeSwitcher from 'components/ModeSwitcher'
 import { useAppModeContext } from 'context/AppModeContext'
+import Key from 'share-ui/components/Icon/Icons/components/Key'
 
 const MainNavigation = () => {
   const { computeMode, subnetMode } = useAppModeContext()
@@ -216,7 +217,7 @@ const MainNavigation = () => {
             isActive={includes(active, 'api-key')}
             onClick={() => onHandleClick('/api-key')}
           >
-            <StyledAPIIcon size={40} />
+            <StyledAPIIcon size={40} picked={includes(active, 'api-key')} />
             {includes(active, 'api-key') && <StyledCorner />}
           </StyledLi>
         </Tooltip>
@@ -226,7 +227,7 @@ const MainNavigation = () => {
             isActive={includes(active, 'billing')}
             onClick={() => onHandleClick('/billing')}
           >
-            <StyledBillingIcon />
+            <StyledBillingIcon picked={includes(active, 'billing')} />
             {includes(active, 'billing') && <StyledCorner />}
           </StyledLi>
         </Tooltip>
@@ -428,14 +429,17 @@ const StyledCorner = styled.div`
   top: 8px; /* Adjust this value based on your design */
   right: -16px; /* Position the left corner */
 `
-const StyledAPIIcon = styled(API)`
+const StyledAPIIcon = styled(Key)<{ picked: boolean }>`
   path {
-    fill: ${({ theme }) => theme.body.iconColor};
+    fill: ${({ picked }) => (picked ? '#FFF' : '#000')};
+
+    stroke: ${({ theme, picked }) => (picked ? theme.body.iconColor : 'transparent')};
   }
 `
 
-const StyledBillingIcon = styled(DollarOutline)`
+const StyledBillingIcon = styled(DollarOutline)<{ picked: boolean }>`
   path {
-    fill: ${({ theme }) => theme.body.iconColor};
+    fill: ${({ theme, picked }) => (picked ? '#FFF' : theme.body.iconColor)};
+    stroke: ${({ theme, picked }) => (picked ? '#FFF' : theme.body.iconColor)};
   }
 `
