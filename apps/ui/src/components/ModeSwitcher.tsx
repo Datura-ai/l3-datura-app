@@ -6,8 +6,10 @@ import { Check, Switcher } from 'share-ui/components/Icon/Icons'
 import styled from 'styled-components'
 import { StyledAddIcon } from 'pages/Navigation/MainNavigation'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const ModeSwitcher = () => {
+  const navigate = useNavigate()
   const { mode, setMode, options } = useAppModeContext()
 
   const [isDropdownOpen, setDropdownOpen] = useState(false)
@@ -51,7 +53,7 @@ const ModeSwitcher = () => {
               )
             })}
 
-            <StyledDropDownMenuItem onClick={() => {}}>
+            <StyledDropDownMenuItem onClick={() => navigate('create-new-app')}>
               <StyledAddIcon size={20} />
               <TypographyPrimary value='Create new application' size={'small'} semiBold />
             </StyledDropDownMenuItem>

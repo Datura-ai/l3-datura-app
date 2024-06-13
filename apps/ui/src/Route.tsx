@@ -112,6 +112,7 @@ import { InviteUsers, CreateUserAccess } from 'pages/InviteUsers'
 import { Pods, PodsContent, MainPod } from 'pages/Pods'
 import Subnets from 'pages/Subnets'
 import Billing from 'pages/Billing'
+import CreateNewApp from 'pages/CreateNewApp'
 
 const Route = () => {
   const { loading } = useContext(AuthContext)
@@ -299,6 +300,12 @@ const Route = () => {
               <Router path={'subnets'} element={<Subnets />} key={document.location.href}></Router>
 
               <Router path={'billing'} element={<Billing />} key={document.location.href}></Router>
+
+              <Router
+                path={'create-new-app'}
+                element={<CreateNewApp />}
+                key={document.location.href}
+              ></Router>
 
               {/* <Router path={'toolkits'} element={<MainRouteLayout />} key={document.location.href}>
               <Router index element={<Toolkit />} key={document.location.href} />
