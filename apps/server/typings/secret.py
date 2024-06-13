@@ -30,3 +30,8 @@ class SecretOutput(SecretInput):
 
     class Config:
         orm_mode = True
+
+
+class SecretActionResponse(BaseModel):
+    message: str
+    success: bool
