@@ -119,3 +119,38 @@ def delete_secret(secret_id: str, auth: UserAccount = Depends(authenticate)):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e)
         )
+
+
+@router.get(
+    "/{secret_id}",
+    response_model=SecretOutput,
+    status_code=200
+)
+def get_secret_by_id(
+    secret_id: str,
+    auth: UserAccount = Depends(authenticate)
+):
+    """
+    Get a secret by its ID with authentication.
+
+    Args:
+        secret_id (str): The ID of the secret to retrieve.
+        auth (UserAccount): User account object obtained from authentication.
+
+    Returns:
+        SecretOutput: The secret object.
+    """
+    try:
+        secret = SecretModel.secret_by_id(
+            db=db,
+            secret_id=secret_id,
+            account=auth.account
+        )
+
+        return SecretOutput.from_orm(secret)
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
