@@ -9,7 +9,12 @@ class CredentialInput(BaseModel):
     password: str
 
 
-class CredentialIOutput(BaseModel):
+class CredentialOutput(BaseModel):
     id: UUID
     credential_name: str
     created_on: datetime
+
+
+class CredentialActionOutput(BaseModel):
+    success: bool
+    message: str
