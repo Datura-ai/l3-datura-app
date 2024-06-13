@@ -19,7 +19,7 @@ const useSecretDetails = () => {
 
     const { id } = useParams()
     const { data: secret, loading: fetch_secret_loading } = useGetSecretById(id)
-    const { deleteSecret, loading: delete_loading } = useDeleteSecretService()
+    const { deleteSecret } = useDeleteSecretService()
 
     React.useEffect(() => {
         if(secret && !fetch_secret_loading) {
@@ -70,6 +70,7 @@ const useSecretDetails = () => {
     }
 
     const handleUpdateSecret = (field: string) => {
+        // TODO update secret 
         navigate(`/secrets`, { state: { need_refetch: true } })
     }
 
