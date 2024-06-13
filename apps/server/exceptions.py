@@ -168,3 +168,7 @@ class UserAccountAccessException(AppBaseException):
 
 class SecretNotFoundException(DatasourceException):
     pass
+
+
+class CredentialNotFoundException(DatasourceException):
+    pass
