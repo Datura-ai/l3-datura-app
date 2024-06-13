@@ -113,6 +113,7 @@ import { Pods, PodsContent, MainPod, ChangeTemplateModal } from 'pages/Pods'
 import { TemplateLayout, Template, CreateTemplate, EditTemplate } from 'pages/template'
 import Subnets from 'pages/Subnets'
 import Billing from 'pages/Billing'
+import { Secrets, CreateSecret, SecretDetails } from 'pages/Secrets'
 
 const Route = () => {
   const { loading } = useContext(AuthContext)
@@ -441,6 +442,30 @@ const Route = () => {
                   element={<EditTemplate />}
                   key={document.location.href}
                 />
+              </Router>
+              
+              <Router path='secrets' key={document.location.href}>
+                <Router index element={<Secrets />} key={document.location.href} />
+                <Router
+                  path={'create-secret'}
+                  element={<CreateSecret />}
+                  key={document.location.href}
+                />
+                <Router
+                  path={':id'}
+                  element={<SecretDetails />}
+                  key={document.location.href}
+                />
+                {/* <Router
+                  path={'create-template'}
+                  element={<CreateTemplate />}
+                  key={document.location.href}
+                />
+                <Router
+                  path={'edit/:id'}
+                  element={<EditTemplate />}
+                  key={document.location.href}
+                /> */}
               </Router>
               {/* <Router path={'groups'} element={<MainRouteLayout />} key={document.location.href}>
               <Router index element={<Group />} key={document.location.href} />

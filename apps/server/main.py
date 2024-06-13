@@ -33,6 +33,7 @@ from controllers.user_account_access import router as user_account_access_router
 from controllers.pod import router as pod_router
 from controllers.resource import router as resource_router
 from controllers.template import router as template_router
+from controllers.secret import router as secret_router
 from models import *  # noqa: F403
 from models.db import Base, engine  # noqa: F401
 from resolvers.account import AccountMutation, AccountQuery
@@ -141,6 +142,7 @@ app.include_router(user_account_access_router, prefix="/user-account-access", in
 app.include_router(pod_router, prefix="/pod", include_in_schema=False)
 app.include_router(resource_router, prefix="/resource", include_in_schema=False)
 app.include_router(template_router, prefix="/template", include_in_schema=False)
+app.include_router(secret_router, prefix="/secret", include_in_schema=False)
 
 
 @app.get("/", include_in_schema=False)

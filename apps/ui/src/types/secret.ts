@@ -1,0 +1,7 @@
+
+
+export interface SecretInput {
+    secret_name: string
+    secret_value: string
+    secret_description: string
+}

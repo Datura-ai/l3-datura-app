@@ -165,3 +165,6 @@ class TemplateNotFoundException(DatasourceException):
 class UserAccountAccessException(AppBaseException):
     pass
 
+
+class SecretNotFoundException(DatasourceException):
+    pass

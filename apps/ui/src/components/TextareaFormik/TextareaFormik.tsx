@@ -12,6 +12,7 @@ type TextareaProps = {
   fieldName: string
   triggerResize?: number
   minHeight?: number
+  placeholder?: string 
 }
 
 const TextareaFormik = ({
