@@ -10,7 +10,7 @@ type AppModeContextType = {
   options: Option[]
 }
 
-type Option = {
+export type Option = {
   type: string
   name: string
   icon: string
@@ -20,7 +20,7 @@ const MODE_OPTIONS = [
   {
     type: 'compute',
     name: 'Compute',
-    icon: 'https://banner2.cleanpng.com/20190620/xso/kisspng-computer-icons-clip-art-transparency-cloud-computi-download-free-png-download-white-cloud-symbol-png-5d0b5fde9d60e4.5549150115610265266446.jpg',
+    icon: 'https://cdn-icons-png.freepik.com/512/929/929574.png',
   },
   {
     type: 'subnet_api',

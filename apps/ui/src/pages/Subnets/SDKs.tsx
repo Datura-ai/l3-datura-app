@@ -14,7 +14,7 @@ const SDKs = () => {
   return (
     <>
       <StyledForm>
-        <StyledInnerFormWrapper style={{ width: '50%' }}>
+        <StyledInnerFormWrapper style={{ width: '35%' }}>
           <TypographyPrimary
             style={{ fontWeight: 500 }}
             value={`SDKs`}
@@ -43,7 +43,15 @@ const SDKs = () => {
           </StyledCardsWrapper>
         </StyledInnerFormWrapper>
 
-        <StyledInnerFormWrapper style={{ width: '50%', marginTop: '30px' }}>
+        <StyledInnerFormWrapper
+          style={{
+            width: '65%',
+            marginTop: '30px',
+            maxHeight: '500px',
+            height: '500px',
+            overflow: 'auto',
+          }}
+        >
           <AiMessageMarkdown children={pickedData.code} />
         </StyledInnerFormWrapper>
       </StyledForm>
