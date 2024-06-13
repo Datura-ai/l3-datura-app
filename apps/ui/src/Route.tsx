@@ -113,7 +113,7 @@ import { Pods, PodsContent, MainPod, ChangeTemplateModal } from 'pages/Pods'
 import { TemplateLayout, Template, CreateTemplate, EditTemplate } from 'pages/template'
 import Subnets from 'pages/Subnets'
 import Billing from 'pages/Billing'
-import { Secrets, CreateSecret } from 'pages/Secrets'
+import { Secrets, CreateSecret, SecretDetails } from 'pages/Secrets'
 
 const Route = () => {
   const { loading } = useContext(AuthContext)
@@ -449,6 +449,11 @@ const Route = () => {
                 <Router
                   path={'create-secret'}
                   element={<CreateSecret />}
+                  key={document.location.href}
+                />
+                <Router
+                  path={':id'}
+                  element={<SecretDetails />}
                   key={document.location.href}
                 />
                 {/* <Router

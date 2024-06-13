@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useGetSecrets } from 'services/secret/useSecretService'
 import { renderColumns } from './columnConfig'
 import React, { useContext } from 'react'
@@ -6,7 +6,9 @@ import { ToastContext } from 'contexts'
 
 const useSecret = () => {
     const { setToast } = useContext(ToastContext)
-    const { data: secrets, loading: fetch_secret_loading, error } = useGetSecrets()
+    const location = useLocation()
+
+    const { data: secrets, loading: fetch_secret_loading, error, refetch } = useGetSecrets()
 
     React.useEffect(() => {
         if(error) {
@@ -18,6 +20,14 @@ const useSecret = () => {
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [error])
+
+    React.useEffect(()=> {
+        if(location?.state?.need_refetch) {
+            refetch()
+            navigate(location.pathname, { state: {} })
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location])
 
     const navigate = useNavigate()
 

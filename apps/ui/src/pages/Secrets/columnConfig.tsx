@@ -64,3 +64,20 @@ export const renderColumns = ({ handleOpenSecret }: RenderColumnsProps) => {
         ...baseConfig
     ]
 }
+
+export const settingsActions = ({ handleActionClick }: { handleActionClick: (action: string) => void }) => {
+    return [
+        {
+            label: 'Edit Secret Value',
+            function: () => handleActionClick('secret-value'),
+        },
+        {
+            label: 'Edit Secret Description',
+            function: () => handleActionClick('secret-description'),
+        },
+        {
+            label: 'Delete Secret',
+            function: () => handleActionClick('delete'),
+        },
+    ]
+}
