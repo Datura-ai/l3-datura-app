@@ -1,0 +1,13 @@
+mutation updateTemplate($template_id: template_id!, $input: input!) @api(name: ai) {
+  updateTemplate(template_id: $template_id, input: $input)
+    @rest(
+        type: "CreateTemplate", 
+        path: "/template/{args.template_id}", 
+        method: "PUT", 
+        bodyKey: "input", 
+        endpoint: "ai"
+    ) {
+    success
+    message
+  }
+}
