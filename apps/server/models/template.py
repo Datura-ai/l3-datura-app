@@ -18,6 +18,7 @@ from typings.template import (
     TemplateVisibilityEnum
 )
 from  exceptions import TemplateNotFoundException
+from typings.template import TemplateInput 
 
 
 class TemplateModel(BaseModel):
@@ -173,6 +174,7 @@ class TemplateModel(BaseModel):
                     TemplateModel.is_deleted is None,
                 ),
             )
+            .order_by(TemplateModel.created_on.desc())
             .all()
         )
 
@@ -232,13 +234,13 @@ class TemplateModel(BaseModel):
         if not old_template:
             raise TemplateNotFoundException("Template not found")
 
-        db_template = cls.update_model_from_input(
-            template_model=old_template,
-            template_input=input
-        )
-        db_template.modified_by = user.id
+        for field in TemplateInput.__annotations__.keys():
+            if hasattr(input, field):
+                setattr(old_template, field, getattr(input, field))
 
-        db.session.add(db_template)
+        old_template.modified_by = user.id
+
+        db.session.add(old_template)
         db.session.commit()
 
-        return db_template
+        return old_template
