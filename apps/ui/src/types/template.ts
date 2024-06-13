@@ -13,10 +13,30 @@ export interface Template {
     expose_http_ports: string
     expose_tcp_ports: string
     template_visibility: string
-    environment_variables: any
+    environment_variables: {
+        env: { key: string; value: string }[]
+    }
     account_id: string
     created_by: string
     created_on: Date
+}
+
+export interface TemplateInput {
+    name: string
+    description: string
+    template_type: string
+    compute_type: string
+    container_image: string
+    container_start_command: string
+    container_disk: number
+    volume_disk: number | null | string
+    volume_mount_path: number | null | string
+    expose_http_ports: string
+    expose_tcp_ports: string
+    template_visibility: string
+    environment_variables: {
+        env: { key: string; value: string }[]
+    }
 }
 
 export interface ChangeTemplateModalProps {
