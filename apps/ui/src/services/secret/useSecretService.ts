@@ -5,6 +5,7 @@ import { SecretInput } from 'types/secret'
 import createSecretGql from 'gql/secret/createSecret.gql'
 import getSecretsGql from 'gql/secret/getSecrets.gql'
 import secretByIdGql from 'gql/secret/secretById.gql'
+import deleteSecretGql from 'gql/secret/deleteSecret.gql'
 
 export const useCreateSecretService = () => {
     const { setToast } = useContext(ToastContext)
@@ -47,9 +48,10 @@ export const useGetSecrets = () => {
     }
 }
 
-export const useGetSecretById = () => {
+export const useGetSecretById = (id: string | undefined) => {
     const { data, error, loading, refetch } = useQuery(secretByIdGql, {
         fetchPolicy: 'cache-first',
+        variables: { secret_id: id },
     })
 
     return {
@@ -58,4 +60,32 @@ export const useGetSecretById = () => {
         loading,
         refetch,
     }
+}
+
+export const useDeleteSecretService = () => {
+    const { setToast } = useContext(ToastContext)
+    const [mutation, { loading }] = useMutation(deleteSecretGql)
+
+    const deleteSecret = async (secret_id: string | undefined) => {
+        try {
+            const {
+                data: { deleteSecret },
+            } = await mutation({
+                variables: {
+                    secret_id
+                },
+            })
+
+            return deleteSecret
+        } catch (error) {
+            setToast({
+                message: error?.message ?? 'Error deleting Secret',
+                type: 'negative',
+                open: true,
+            })
+            throw error; // Rethrow the error to propagate it to the caller
+        }
+    }
+
+    return { deleteSecret, loading }
 }
