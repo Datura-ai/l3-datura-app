@@ -42,6 +42,7 @@ def get_secrets(auth: UserAccount = Depends(authenticate)):
             detail=str(e)
         )
 
+
 @router.post(
     "",
     response_model=SecretActionResponse,
@@ -79,6 +80,39 @@ def create_secret(input: SecretInput, auth: UserAccount = Depends(authenticate))
             "success": True,
             "message": "Template created successfully"
         }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
+
+
+@router.delete(
+    "/{secret_id}",
+    response_model=SecretActionResponse,
+    status_code=201
+)
+def delete_secret(secret_id: str, auth: UserAccount = Depends(authenticate)):
+    """
+    Delete a secret by its ID with authentication.
+
+    Args:
+        secret_id (str): The ID of the secret to delete.
+        auth (UserAccount): User account object obtained from authentication.
+
+    Returns:
+        dict: A dictionary indicating the success or failure of the deletion.
+    """
+    try:
+
+        SecretModel.delete_secret_by_id(
+            db=db,
+            secret_id=secret_id,
+            account=auth.account
+        )
+
+        return {"success": True, "message": "Secret successfully deleted"}
 
     except Exception as e:
         raise HTTPException(
