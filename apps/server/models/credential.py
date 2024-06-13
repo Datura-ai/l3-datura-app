@@ -6,16 +6,15 @@ from sqlalchemy import (
     ForeignKey,
     or_,
     String,
-    DateTime
 )
 from sqlalchemy.orm import Session, relationship
 import uuid
-from datetime import datetime
 import hashlib
 import binascii
 import os
 from typings.credential import CredentialInput
 from exceptions import CredentialNotFoundException
+
 
 class CredentialModel(BaseModel):
 
@@ -25,7 +24,7 @@ class CredentialModel(BaseModel):
     secret_name = Column(String, nullable=False)
     user_name = Column(String, nullable=False)
     password = Column(String, nullable=False)
-    
+
     is_deleted = Column(Boolean, default=False, index=True)
     account_id = Column(
         UUID, ForeignKey("account.id", ondelete="CASCADE"), nullable=True
