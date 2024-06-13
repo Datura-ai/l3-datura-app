@@ -21,7 +21,7 @@ class SecretInput(BaseModel):
 class SecretOutput(SecretInput):
     id: UUID
     secret_name: str
-    last_retrieved_At: datetime
+    last_retrieved_on: datetime
     secret_description: Optional[str]
     account_id: UUID
     created_by: UUID
