@@ -47,7 +47,7 @@ export const useCreateTemplateService = () => {
             return createTemplate
         } catch (error) {
             setToast({
-                message: error?.message ?? 'Error creating user access',
+                message: error?.message ?? 'Error creating Template',
                 type: 'negative',
                 open: true,
             })
@@ -75,7 +75,7 @@ export const useDeleteTemplateService = () => {
             return deleteTemplate
         } catch (error) {
             setToast({
-                message: error?.message ?? 'Error deleting user access',
+                message: error?.message ?? 'Error deleting Template',
                 type: 'negative',
                 open: true,
             })
@@ -128,7 +128,7 @@ export const useUpdateTemplateService = () => {
             return updateTemplate
         } catch (error) {
             setToast({
-                message: error?.message ?? 'Error creating user access',
+                message: error?.message ?? 'Error updating Template',
                 type: 'negative',
                 open: true,
             })
