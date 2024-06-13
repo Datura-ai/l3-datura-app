@@ -110,6 +110,7 @@ import VoiceOptionsModal from 'modals/VoiceOptionsModal'
 import LlmSettingsModal from 'modals/LlmSettingsModal'
 import { InviteUsers, CreateUserAccess } from 'pages/InviteUsers'
 import { Pods, PodsContent, MainPod, ChangeTemplateModal } from 'pages/Pods'
+import { TemplateLayout, Template, CreateTemplate, EditTemplate } from 'pages/template'
 import Subnets from 'pages/Subnets'
 import Billing from 'pages/Billing'
 
@@ -426,11 +427,20 @@ const Route = () => {
                   element={<PodsContent />}
                   key={document.location.href}
                 />
-                {/* <Router
-                  path={':apiKeyId/edit-api-key'}
-                  element={<EditApiKeyForm />}
+              </Router>
+
+              <Router path='templates' element={<TemplateLayout />} key={document.location.href}>
+                <Router index element={<Template />} key={document.location.href} />
+                <Router
+                  path={'create-template'}
+                  element={<CreateTemplate />}
                   key={document.location.href}
-                /> */}
+                />
+                <Router
+                  path={'edit/:id'}
+                  element={<EditTemplate />}
+                  key={document.location.href}
+                />
               </Router>
               {/* <Router path={'groups'} element={<MainRouteLayout />} key={document.location.href}>
               <Router index element={<Group />} key={document.location.href} />
