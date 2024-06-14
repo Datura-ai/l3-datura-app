@@ -3,6 +3,7 @@ import { ToastContext } from 'contexts'
 import { useContext } from 'react'
 
 import createCredentialGql from 'gql/credential/createCredential.gql'
+import getCredentialsGql from 'gql/credential/getCredentials.gql'
 import { CredentialInput } from 'types/credential'
 
 
@@ -32,4 +33,17 @@ export const useCreateCredentialService = () => {
     }
 
     return { createCredential, loading }
+}
+
+export const useGetCredentials = () => {
+    const { data, error, loading, refetch } = useQuery(getCredentialsGql, {
+        fetchPolicy: 'cache-first',
+    })
+
+    return {
+        data: data?.getCredentials || [],
+        error,
+        loading,
+        refetch,
+    }
 }
