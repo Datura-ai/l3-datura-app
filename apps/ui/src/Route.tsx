@@ -113,6 +113,7 @@ import { Pods, PodsContent, MainPod, ChangeTemplateModal } from 'pages/Pods'
 import { TemplateLayout, Template, CreateTemplate, EditTemplate } from 'pages/template'
 import Subnets from 'pages/Subnets'
 import Billing from 'pages/Billing'
+import CreateNewApp from 'pages/CreateNewApp'
 import { Secrets, CreateSecret, SecretDetails } from 'pages/Secrets'
 import Credentials from 'pages/Credentials'
 
@@ -303,6 +304,12 @@ const Route = () => {
 
               <Router path={'billing'} element={<Billing />} key={document.location.href}></Router>
 
+              <Router
+                path={'create-new-app'}
+                element={<CreateNewApp />}
+                key={document.location.href}
+              ></Router>
+
               {/* <Router path={'toolkits'} element={<MainRouteLayout />} key={document.location.href}>
               <Router index element={<Toolkit />} key={document.location.href} />
               <Router path={':slug'} element={<ToolView />} key={document.location.href} />
@@ -438,13 +445,9 @@ const Route = () => {
                   element={<CreateTemplate />}
                   key={document.location.href}
                 />
-                <Router
-                  path={'edit/:id'}
-                  element={<EditTemplate />}
-                  key={document.location.href}
-                />
+                <Router path={'edit/:id'} element={<EditTemplate />} key={document.location.href} />
               </Router>
-              
+
               <Router path='secrets' key={document.location.href}>
                 <Router index element={<Secrets />} key={document.location.href} />
                 <Router
