@@ -1,7 +1,6 @@
 import { StyledChatWrapper, StyledContainer, StyledMainWrapper } from 'routes/ChatRouteLayout'
 import { StyledAppContainer } from 'components/Layout/LayoutStyle'
 import { StyledTableWrapper } from 'pages/Billing/panels/Transactions'
-import styled from 'styled-components'
 import { StyledHeaderGroup } from 'pages/Home/homeStyle.css'
 import { ButtonPrimary } from 'components/Button/Button'
 import Button from 'share-ui/components/Button/Button'
