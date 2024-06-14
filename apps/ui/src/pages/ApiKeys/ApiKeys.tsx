@@ -5,9 +5,9 @@ import columnConfig from './columnConfig'
 
 import Button from 'share-ui/components/Button/Button'
 import Table from 'components/Table'
-import Add from 'share-ui/components/Icon/Icons/components/Add'
+
 import Heading from 'share-ui/components/Heading/Heading'
-import Typography from 'share-ui/components/typography/Typography'
+
 import { useNavigate } from 'react-router-dom'
 
 import useApiKeys from './useApiKeys'
