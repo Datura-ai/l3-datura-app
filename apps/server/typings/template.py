@@ -41,6 +41,7 @@ class TemplateInput(BaseModel):
     expose_tcp_ports: Optional[str]
     template_visibility: TemplateVisibilityEnum
     environment_variables: Optional[dict]
+    credential: Optional[UUID]
 
 
 class TemplateOutput(TemplateInput):

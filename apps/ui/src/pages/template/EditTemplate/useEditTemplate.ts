@@ -5,6 +5,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import { TemplateInput } from "types/template"
 import * as yup from 'yup'
 import { useTemplateById, useUpdateTemplateService } from 'services/template/useTemplateService'
+import { useGetCredentials } from 'services/credential/useCredentialService'
+import { Credential } from "types/credential"
 
 const validationSchema = yup.object().shape({
     container_image: yup.string().required('Please enter container image'),
@@ -25,6 +27,7 @@ const initialValues: TemplateInput = {
     volume_mount_path: '',
     expose_http_ports: '',
     expose_tcp_ports: '',
+    credential: '',
     environment_variables: {
         env: []
     },
@@ -37,6 +40,7 @@ const useEditTemplate = () => {
 
     const { data, loading: template_loading } = useTemplateById(id)
     const { updateTemplate, loading: update_template_loading } = useUpdateTemplateService()
+    const { data: credentials } = useGetCredentials()
 
     const formik = useFormik({
         initialValues: { 
@@ -62,6 +66,7 @@ const useEditTemplate = () => {
                 expose_http_ports: data.expose_http_ports,
                 expose_tcp_ports: data.expose_tcp_ports,
                 environment_variables: data.environment_variables,
+                credential: data.credential
             })
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -89,9 +94,12 @@ const useEditTemplate = () => {
         }
     }
 
+    const credentialsList = credentials.map((item: Credential) => ({ label: item.credential_name, value: item.id }))
+
     return {
         formik,
         update_template_loading,
+        credentials: credentialsList
     }
 }
 

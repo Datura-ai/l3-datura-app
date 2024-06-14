@@ -73,6 +73,9 @@ class TemplateModel(BaseModel):
         nullable=False
     )
     environment_variables = Column(JSONB, nullable=True)
+    credential = Column(
+        UUID, ForeignKey("credential.id", ondelete="CASCADE"), nullable=True
+    )
 
     is_deleted = Column(Boolean, default=False, index=True)
     account_id = Column(

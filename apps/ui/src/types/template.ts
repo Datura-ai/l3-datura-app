@@ -34,6 +34,7 @@ export interface TemplateInput {
     expose_http_ports: string
     expose_tcp_ports: string
     template_visibility: string
+    credential: string | null
     environment_variables: {
         env: { key: string; value: string }[]
     }

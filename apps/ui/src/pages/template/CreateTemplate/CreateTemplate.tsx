@@ -14,14 +14,18 @@ import useCreateTemplate from './useCreateTemplate'
 import TemplateForm from '../components/TemplateForm'
 
 const CreateTemplate  = () => {
-    const { formik, create_template_loading } = useCreateTemplate()
+    const { formik, create_template_loading, credentials } = useCreateTemplate()
     
     return (
         <FormikProvider value={formik}>
             <StyledSectionWrapper>
 
                 <StyledFormRoot>
-                    <TemplateForm formik={formik} label="Create Template" />
+                    <TemplateForm 
+                        formik={formik} 
+                        label="Create Template" 
+                        credentials={credentials}
+                    />
                 </StyledFormRoot>
                 <StyledButtonWrapper>
                     <ButtonPrimary
