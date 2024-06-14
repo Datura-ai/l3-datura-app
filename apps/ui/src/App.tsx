@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom'
-import Route from './Route'
+import Route from 'Route'
 
 import { ApolloProvider } from '@apollo/client'
 import * as Sentry from '@sentry/react'

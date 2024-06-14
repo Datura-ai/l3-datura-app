@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom'
 import LogsPanel from 'pages/Subnets/panels/LogsPanel/LogsPanel'
 import SDKs from 'pages/Subnets/SDKs'
 import { useAppModeContext } from 'context/AppModeContext'
+import UsageChart from 'pages/Pods/UsageChart'
 
 const Home = () => {
   const { user } = React.useContext(AuthContext)
@@ -84,6 +85,18 @@ const Home = () => {
             <>
               {computeMode && (
                 <>
+                  <StyledSectionWrapper>
+                    <StyledHeaderGroup className='header_group'>
+                      <StyledMainHeaderWrapper>
+                        <HeadingPrimary type={Heading.types?.h1} size='xss' value={`Usage`} />
+                      </StyledMainHeaderWrapper>
+                    </StyledHeaderGroup>
+
+                    <ComponentsWrapper noPadding>
+                      <UsageChart />
+                    </ComponentsWrapper>
+                  </StyledSectionWrapper>
+
                   <StyledSectionWrapper>
                     <StyledHeaderGroup className='header_group'>
                       <StyledMainHeaderWrapper>

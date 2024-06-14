@@ -540,7 +540,7 @@ const StyledMiddleArea = styled.div`
 export const StyledHorizontalDivider = styled.div`
   border-bottom: ${({ theme }) => theme.body.secondaryBorder};
 
-  width: calc(100% - 16px);
+  width: 100%;
 
   /* margin: 8px 0; */
 `

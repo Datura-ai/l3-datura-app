@@ -1,16 +1,16 @@
-import Integrations from 'share-ui/components/Icon/Icons/components/integrations'
-
 import TypographyPrimary from './Typography/Primary'
-import { Arrow, Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-menu'
+
+import { Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-menu'
 import { useAppModeContext } from 'context/AppModeContext'
-import { Add, Check } from 'share-ui/components/Icon/Icons'
+import { Check, Switcher } from 'share-ui/components/Icon/Icons'
 import styled from 'styled-components'
 import { StyledAddIcon } from 'pages/Navigation/MainNavigation'
 import { useEffect, useState } from 'react'
-import Cloud from 'share-ui/components/Icon/Icons/components/Cloud'
+import { useNavigate } from 'react-router-dom'
 
 const ModeSwitcher = () => {
-  const { mode, setMode } = useAppModeContext()
+  const navigate = useNavigate()
+  const { mode, setMode, options } = useAppModeContext()
 
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [showDropdownValue, setShowDropdownValue] = useState(false)
@@ -31,32 +31,31 @@ const ModeSwitcher = () => {
       <StyledDropDownMenuRoot onOpenChange={setDropdownOpen}>
         <StyledSwitcher>
           <StyledDropDownMenuTrigger>
-            <Integrations />
+            <Switcher size={32} />
 
             {showDropdownValue && (
               <StyledDropdownValue>
-                <TypographyPrimary value={mode} />
+                <TypographyPrimary value={mode.name} size={'small'} semiBold />
               </StyledDropdownValue>
             )}
           </StyledDropDownMenuTrigger>
         </StyledSwitcher>
         {showDropdownValue && (
           <StyledDropdownContent>
-            <StyledDropDownMenuItem onClick={() => setMode('Compute')}>
-              <Cloud />
+            {options.map(option => {
+              return (
+                <StyledDropDownMenuItem key={option.type} onClick={() => setMode(option)}>
+                  <StyledImg src={option.icon} />
 
-              <TypographyPrimary value='Compute' size={'small'} />
-              {mode === 'Compute' && <StyledCheck />}
-            </StyledDropDownMenuItem>
-            <StyledDropDownMenuItem onClick={() => setMode('Subnet API')}>
-              <StyledImg src='https://icons.veryicon.com/png/o/application/cloud-supervision-platform-vr10/subnets.png' />
+                  <TypographyPrimary value={option.name} size={'small'} semiBold />
+                  {mode.type === option.type && <StyledCheck />}
+                </StyledDropDownMenuItem>
+              )
+            })}
 
-              <TypographyPrimary value='Subnet API' size={'small'} />
-              {mode === 'Subnet API' && <StyledCheck />}
-            </StyledDropDownMenuItem>
-            <StyledDropDownMenuItem onClick={() => {}}>
+            <StyledDropDownMenuItem onClick={() => navigate('create-new-app')}>
               <StyledAddIcon size={20} />
-              <TypographyPrimary value='Create new application' size={'small'} />
+              <TypographyPrimary value='Create new application' size={'small'} semiBold />
             </StyledDropDownMenuItem>
           </StyledDropdownContent>
         )}
@@ -130,7 +129,7 @@ const StyledDropdownContent = styled(Content)`
 
 const StyledDropDownMenuItem = styled(Item)`
   all: unset;
-  font-size: 13px;
+
   line-height: 1;
   border-radius: 3px;
   display: flex;
@@ -142,10 +141,7 @@ const StyledDropDownMenuItem = styled(Item)`
   display: flex;
   gap: 10px;
   color: var(--content-content-primary, #fff);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 16px;
+
   :hover {
     background: ${({ theme }) => theme.body.humanMessageBgColor};
   }
@@ -157,14 +153,28 @@ const StyledDropDownMenuTrigger = styled(Trigger)`
 
   display: flex;
   align-items: center;
+  gap: 10px;
 
   width: 100%;
   height: 100%;
-`
-const StyledSwitcher = styled.div``
 
-const StyledImg = styled.img`
-  width: 18px;
-  height: 18px;
-  /* margin: 0 7px; */
+  padding-left: 7px;
+`
+const StyledSwitcher = styled.div`
+  width: 100%;
+  height: 100%;
+`
+
+const StyledImg = styled.img<{ large?: boolean }>`
+  width: 22px;
+  height: 22px;
+
+  object-fit: contain;
+
+  ${({ large }) =>
+    large &&
+    `
+  width: 34px;
+  height: 34px;
+  `}
 `
