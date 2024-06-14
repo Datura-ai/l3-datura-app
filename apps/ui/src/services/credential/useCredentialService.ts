@@ -70,13 +70,13 @@ export const useDeleteCredentialService = () => {
     const { setToast } = useContext(ToastContext)
     const [mutation, { loading }] = useMutation(deleteCredentialGql)
 
-    const deleteCredential = async (secret_id: string | undefined): Promise<{ message: string; success: boolean }> => {
+    const deleteCredential = async (credential_id: string | undefined): Promise<{ message: string; success: boolean }> => {
         try {
             const {
                 data: { deleteCredential },
             } = await mutation({
                 variables: {
-                    secret_id
+                    credential_id
                 },
             })
 
