@@ -7,6 +7,7 @@ import TypographyPrimary from 'components/Typography/Primary'
 import CardWrapper from 'components/wrappers/CardWrapper'
 import TypographySecondary from 'components/Typography/Secondary'
 import { StyledHeader } from './SelectType'
+import { StyledHorizontalDivider } from 'routes/ChatRouteLayout'
 
 const Configurations = () => {
   return (
@@ -19,6 +20,8 @@ const Configurations = () => {
             size='medium'
           />
         </StyledHeader>
+
+        <StyledHorizontalDivider />
 
         <CardWrapper>
           <StyledFieldsWrapper>

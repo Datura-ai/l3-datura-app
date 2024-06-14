@@ -11,6 +11,7 @@ import SelectType from './steps/SelectType'
 
 import { ButtonPrimary } from 'components/Button/Button'
 import Configurations from './steps/Configurations'
+import TypographyPrimary from 'components/Typography/Primary'
 
 const CreateNewApp = () => {
   const [step, setStep] = useState(1)
@@ -47,18 +48,18 @@ const CreateNewApp = () => {
             <StyledRoot>
               <StyledHeader>
                 <StyledButton picked={step === 1} onClick={() => setStep(1)}>
-                  Select App type
+                  <TypographyPrimary value='Select App type' bold={step === 1} />
                 </StyledButton>
 
                 <StyledDividerLine />
 
                 <StyledButton picked={step === 2} onClick={() => setStep(2)}>
-                  Configuration
+                  <TypographyPrimary value='Configuration' bold={step === 2} />
                 </StyledButton>
                 <StyledDividerLine />
 
                 <StyledButton picked={step === 3} onClick={() => setStep(3)}>
-                  Get Started
+                  <TypographyPrimary value='Get Started' bold={step === 3} />
                 </StyledButton>
               </StyledHeader>
 
@@ -95,7 +96,7 @@ const StyledHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  /* gap: 20px; */
 `
 
 const StyledBody = styled.div`
@@ -120,11 +121,13 @@ const StyledButtonsWrapper = styled.div`
 
   margin-top: 50px;
   padding: 10px 0;
-
-  /* background: ${({ theme }) => theme.body.componentsWrapperBg}; */
 `
 const StyledButton = styled.button<{ picked: boolean }>`
   opacity: 0.6;
+
+  width: 200px;
+
+  padding: 20px;
 
   opacity: ${props => (props.picked ? 1 : 0.6)};
 `
