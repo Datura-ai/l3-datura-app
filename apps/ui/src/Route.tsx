@@ -114,6 +114,7 @@ import { TemplateLayout, Template, CreateTemplate, EditTemplate } from 'pages/te
 import Subnets from 'pages/Subnets'
 import Billing from 'pages/Billing'
 import { Secrets, CreateSecret, SecretDetails } from 'pages/Secrets'
+import Credentials from 'pages/Credentials'
 
 const Route = () => {
   const { loading } = useContext(AuthContext)
@@ -456,20 +457,11 @@ const Route = () => {
                   element={<SecretDetails />}
                   key={document.location.href}
                 />
-                {/* <Router
-                  path={'create-template'}
-                  element={<CreateTemplate />}
-                  key={document.location.href}
-                />
-                <Router
-                  path={'edit/:id'}
-                  element={<EditTemplate />}
-                  key={document.location.href}
-                /> */}
               </Router>
-              {/* <Router path={'groups'} element={<MainRouteLayout />} key={document.location.href}>
-              <Router index element={<Group />} key={document.location.href} />
-            </Router> */}
+              <Router path='credentials' key={document.location.href}>
+                <Router index element={<Credentials />} key={document.location.href} />
+              </Router>
+          
 
               <Router path={'developers'} element={<DevelopersRouteLayout />}>
                 <Router index element={<ApiKeys />} key={document.location.href} />
