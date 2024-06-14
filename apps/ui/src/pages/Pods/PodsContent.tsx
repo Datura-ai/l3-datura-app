@@ -12,6 +12,7 @@ import Price from './components/details/Price'
 import { useResource, usePodContent } from './usePods'
 import { chipStyles, borderBoxStyles } from './styles'
 import { Resource } from 'types/resource'
+import Typography from '@mui/material/Typography'
 
 const Line = ({ label }: { label: string }) => {
   return (
@@ -159,6 +160,9 @@ const PodsContent = () => {
   return (
     <StyledBox>
       <StyledContainer>
+        <Typography fontSize={20} fontWeight={600}>
+          Add Pod
+        </Typography>
         <Box
           sx={{
             width: '100%',
@@ -178,7 +182,11 @@ const PodsContent = () => {
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 2 }} mt={2} rowGap={1}>
                   {resources[key].map((item: Resource, i: number) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={i}>
-                      <ActionAreaCard item={item} selected={resource} selectCard={handleSelectResource} />
+                      <ActionAreaCard
+                        item={item}
+                        selected={resource}
+                        selectCard={handleSelectResource}
+                      />
                     </Grid>
                   ))}
                 </Grid>
@@ -189,9 +197,7 @@ const PodsContent = () => {
 
         {resource && (
           <>
-            <Details 
-              resource={resource}
-            />
+            <Details resource={resource} />
             {/* <Price /> */}
           </>
         )}
