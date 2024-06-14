@@ -216,7 +216,7 @@ const MainNavigation = () => {
           <Tooltip content={t('Templates')} position={Tooltip.positions.LEFT}>
             <StyledLi
               isActive={includes(active, 'templates')}
-              onClick={() => onHandleClick('/templates')}
+              onClick={() => onHandleClick('/templates/create-template')}
             >
               <StyledTemplateIcon size={30} picked={includes(active, 'templates')} />
               {includes(active, 'templates') && <StyledCorner />}
