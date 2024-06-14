@@ -10,49 +10,55 @@ import {
   StyledHeaderGroup,
   StyledSectionDescription,
   StyledSectionTitle,
-  StyledSectionWrapper,
 } from 'pages/Home/homeStyle.css'
-import ComponentsWrapper from 'components/ComponentsWrapper/ComponentsWrapper'
-
-import { StyledFormWrapper } from 'styles/formStyles.css'
 
 import ApiKeysForm from '../CreateApiKey/ApiKeysForm'
 import useEditApiKey from './useEditApiKey'
+
+import {
+  StyledChatWrapper,
+  StyledContainer,
+  StyledHorizontalDivider,
+  StyledMainWrapper,
+} from 'routes/ChatRouteLayout'
+import { StyledAppContainer } from 'components/Layout/LayoutStyle'
+import { StyledFormWrapper } from 'pages/Secrets/CreateSecret/CreateSecret'
+import { StyledHeaderTextWrapper } from 'styles/formStyles.css'
 
 function EditApiKeyForm() {
   const { formik, isLoading } = useEditApiKey()
   // console.log('formik', formik)
 
   return (
-    <>
-      <FormikProvider value={formik}>
-        <StyledSectionWrapper>
-          <StyledHeaderGroup className='header_group'>
-            <div>
-              <StyledSectionTitle>Edit API Key</StyledSectionTitle>
-              <StyledSectionDescription>Edit your API Key details.</StyledSectionDescription>
-            </div>
+    <FormikProvider value={formik}>
+      <StyledAppContainer>
+        <StyledContainer>
+          <StyledMainWrapper>
+            <StyledChatWrapper>
+              <StyledHeaderGroup className='header_group'>
+                <StyledHeaderTextWrapper>
+                  <StyledSectionTitle>Edit API Key</StyledSectionTitle>
+                  <StyledSectionDescription>Edit your API Key details.</StyledSectionDescription>
+                </StyledHeaderTextWrapper>
 
-            <StyledButtonWrapper>
-              <BackButton />
-              <ButtonPrimary
-                onClick={formik?.handleSubmit}
-                size={Button.sizes?.SMALL}
-                disabled={isLoading}
-              >
-                {isLoading ? <Loader size={32} /> : 'Save'}
-              </ButtonPrimary>
-            </StyledButtonWrapper>
-          </StyledHeaderGroup>
+                <StyledButtonWrapper>
+                  <BackButton />
+                  <ButtonPrimary onClick={formik?.handleSubmit} disabled={isLoading}>
+                    {isLoading ? <Loader size={32} /> : 'Save'}
+                  </ButtonPrimary>
+                </StyledButtonWrapper>
+              </StyledHeaderGroup>
 
-          <ComponentsWrapper noPadding>
-            <StyledFormWrapper>
-              <ApiKeysForm formik={formik} />
-            </StyledFormWrapper>
-          </ComponentsWrapper>
-        </StyledSectionWrapper>
-      </FormikProvider>
-    </>
+              <StyledHorizontalDivider />
+
+              <StyledFormWrapper>
+                <ApiKeysForm formik={formik} />
+              </StyledFormWrapper>
+            </StyledChatWrapper>
+          </StyledMainWrapper>
+        </StyledContainer>
+      </StyledAppContainer>
+    </FormikProvider>
   )
 }
 

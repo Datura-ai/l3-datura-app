@@ -21,6 +21,7 @@ import {
 } from 'routes/ChatRouteLayout'
 import { StyledAppContainer } from 'components/Layout/LayoutStyle'
 import { StyledFormWrapper } from 'pages/Secrets/CreateSecret/CreateSecret'
+import { StyledHeaderTextWrapper } from 'styles/formStyles.css'
 
 function CreateApiKeyForm() {
   const { formik, isLoading } = useCreateApiKey()
@@ -33,12 +34,12 @@ function CreateApiKeyForm() {
             <StyledMainWrapper>
               <StyledChatWrapper>
                 <StyledHeaderGroup className='header_group'>
-                  <div style={{ width: '100%' }}>
+                  <StyledHeaderTextWrapper>
                     <StyledSectionTitle>Add API Key</StyledSectionTitle>
                     <StyledSectionDescription>
                       {`Add new API keys to enable and manage access to your application's features.`}
                     </StyledSectionDescription>
-                  </div>
+                  </StyledHeaderTextWrapper>
 
                   <StyledButtonWrapper>
                     <BackButton />
