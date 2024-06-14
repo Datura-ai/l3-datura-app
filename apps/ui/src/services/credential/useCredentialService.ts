@@ -1,24 +1,24 @@
 import { useQuery, useMutation } from '@apollo/client'
 import { ToastContext } from 'contexts'
 import { useContext } from 'react'
-
 import createCredentialGql from 'gql/credential/createCredential.gql'
 import getCredentialsGql from 'gql/credential/getCredentials.gql'
 import deleteCredentialGql from 'gql/credential/deleteCredential.gql'
+import updateCredentialGql from 'gql/credential/updateCredential.gql'
 import { CredentialInput } from 'types/credential'
 
 
 /**
- * A hook that provides a function to create a credential.
+ * Returns an object with a function to create a credential and a boolean indicating if the mutation is currently loading.
  *
  * @param {CredentialInput} input - The input data for creating the credential.
- * @return {Promise<any>} The created credential data.
+ * @return {Promise<{ message: string; success: boolean }>} An object containing a message string and a boolean indicating the success of the creation.
  */
 export const useCreateCredentialService = () => {
     const { setToast } = useContext(ToastContext)
     const [mutation, { loading }] = useMutation(createCredentialGql)
 
-    const createCredential = async (input: CredentialInput) => {
+    const createCredential = async (input: CredentialInput): Promise<{ message: string; success: boolean }> => {
         try {
             const {
                 data: { createCredential },
@@ -62,19 +62,15 @@ export const useGetCredentials = () => {
 }
 
 /**
- * A hook that provides a function to delete a credential.
+ * Returns an object with a function to delete a credential and a boolean indicating if the mutation is currently loading.
  *
- * @return {{ deleteCredential: (secret_id: string | undefined) => Promise<any>, loading: boolean }} An object with two properties:
- *   - deleteCredential: A function that takes a secret_id and returns a Promise that resolves to the deleted credential.
- *   - loading: A boolean indicating whether the mutation is currently loading.
- *
- * @throws {Error} If there is an error deleting the credential.
+ * @return {Object} An object containing a function to delete a credential and a boolean indicating if the mutation is currently loading.
  */
 export const useDeleteCredentialService = () => {
     const { setToast } = useContext(ToastContext)
     const [mutation, { loading }] = useMutation(deleteCredentialGql)
 
-    const deleteCredential = async (secret_id: string | undefined) => {
+    const deleteCredential = async (secret_id: string | undefined): Promise<{ message: string; success: boolean }> => {
         try {
             const {
                 data: { deleteCredential },
@@ -96,4 +92,40 @@ export const useDeleteCredentialService = () => {
     }
 
     return { deleteCredential, loading }
+}
+
+/**
+ * Returns an object with a function to update a credential and a boolean indicating if the mutation is currently loading.
+ *
+ * @param {string | undefined} credential_id - The ID of the credential to update.
+ * @param {CredentialInput} input - The input data for updating the credential.
+ * @return {Promise<{ message: string; success: boolean }>} An object containing a message string and a boolean indicating the success of the update.
+ */
+export const useUpdateCredentialService = () => {
+    const { setToast } = useContext(ToastContext)
+    const [mutation, { loading }] = useMutation(updateCredentialGql)
+
+    const updateCredential = async (credential_id: string | undefined, input: CredentialInput): Promise<{ message: string; success: boolean }> => {
+        try {
+            const {
+                data: { updateCredential },
+            } = await mutation({
+                variables: {
+                    credential_id,
+                    input: input,
+                },
+            })
+
+            return updateCredential
+        } catch (error) {
+            setToast({
+                message: error?.message ?? 'Error updating Credential',
+                type: 'negative',
+                open: true,
+            })
+            throw error; // Rethrow the error to propagate it to the caller
+        }
+    }
+
+    return { updateCredential, loading }
 }
