@@ -109,10 +109,12 @@ import EditScheduleModal from 'modals/EditScheduleModal'
 import VoiceOptionsModal from 'modals/VoiceOptionsModal'
 import LlmSettingsModal from 'modals/LlmSettingsModal'
 import { InviteUsers, CreateUserAccess } from 'pages/InviteUsers'
-import { Pods, PodsContent, MainPod } from 'pages/Pods'
+import { Pods, PodsContent, MainPod, ChangeTemplateModal } from 'pages/Pods'
+import { TemplateLayout, Template, CreateTemplate, EditTemplate } from 'pages/template'
 import Subnets from 'pages/Subnets'
 import Billing from 'pages/Billing'
 import CreateNewApp from 'pages/CreateNewApp'
+import { Secrets, CreateSecret, SecretDetails } from 'pages/Secrets'
 
 const Route = () => {
   const { loading } = useContext(AuthContext)
@@ -433,9 +435,34 @@ const Route = () => {
                   element={<PodsContent />}
                   key={document.location.href}
                 />
+              </Router>
+
+              <Router path='templates' element={<TemplateLayout />} key={document.location.href}>
+                <Router index element={<Template />} key={document.location.href} />
+                <Router
+                  path={'create-template'}
+                  element={<CreateTemplate />}
+                  key={document.location.href}
+                />
+                <Router path={'edit/:id'} element={<EditTemplate />} key={document.location.href} />
+              </Router>
+
+              <Router path='secrets' key={document.location.href}>
+                <Router index element={<Secrets />} key={document.location.href} />
+                <Router
+                  path={'create-secret'}
+                  element={<CreateSecret />}
+                  key={document.location.href}
+                />
+                <Router path={':id'} element={<SecretDetails />} key={document.location.href} />
                 {/* <Router
-                  path={':apiKeyId/edit-api-key'}
-                  element={<EditApiKeyForm />}
+                  path={'create-template'}
+                  element={<CreateTemplate />}
+                  key={document.location.href}
+                />
+                <Router
+                  path={'edit/:id'}
+                  element={<EditTemplate />}
                   key={document.location.href}
                 /> */}
               </Router>
@@ -491,6 +518,7 @@ const Route = () => {
         <EditScheduleModal />
         <VoiceOptionsModal />
         <TwilioPhoneNumberSidConfirmationModal />
+        <ChangeTemplateModal />
 
         <CommandMenu
           open={cmdkOpen}

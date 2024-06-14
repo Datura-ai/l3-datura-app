@@ -206,7 +206,7 @@ const MainNavigation = () => {
               isActive={includes(active, 'models')}
               onClick={() => onHandleClick('/models')}
             >
-              <FineTuning size={30} />
+              <FineTuning />
               {includes(active, 'models') && <StyledCorner />}
             </StyledLi>
           </Tooltip>

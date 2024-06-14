@@ -16,6 +16,7 @@ type AgentDropdownProps = {
   optionSize?: 'large' | 'medium' | 'small'
   isMulti?: boolean
   size?: 'large' | 'medium' | 'small'
+  labelGap?: number
 }
 
 const AgentDropdown = ({
@@ -28,6 +29,7 @@ const AgentDropdown = ({
   isMulti,
   optionSize = 'medium',
   size = 'medium',
+  labelGap = 10,
 }: AgentDropdownProps) => {
   const { t } = useTranslation()
   let value = fieldValue
@@ -72,7 +74,7 @@ const AgentDropdown = ({
         const { meta } = formik
 
         return (
-          <StyledWrapper isValidationError={meta?.error}>
+          <StyledWrapper isValidationError={meta?.error} labelGap={labelGap}>
             {label && (
               <TypographyPrimary
                 value={label}
@@ -106,10 +108,10 @@ const AgentDropdown = ({
 export default AgentDropdown
 
 //todo update dropdown styles in storybook
-const StyledWrapper = styled.div<{ isValidationError: boolean }>`
+const StyledWrapper = styled.div<{ isValidationError: boolean, labelGap?: number }>`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: ${({ labelGap }) => labelGap || 10}px;
   width: 100%;
 
   ${p =>
