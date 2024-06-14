@@ -19,7 +19,16 @@ import EnvVariables from './EnvVariables'
 const black = '#000000'
 const white = 'rgb(255, 255, 255)'
 
-const TemplateForm = ({ formik, label }: any) => {
+interface TemplateFormProps {
+    formik: any
+    label: string
+    credentials: {
+        label: string
+        value: string
+    }[]
+}
+
+const TemplateForm = ({ formik, label, credentials }: TemplateFormProps) => {
     const [env_is_open, setEnvIsOpen] = React.useState(false)
     return (
         <StyledFormInputWrapper>
@@ -58,11 +67,10 @@ const TemplateForm = ({ formik, label }: any) => {
                 <FormikTextField name='container_image' placeholder={'Container Image'} label={'Container Image'} />
                 <AgentDropdown
                     label={'Container Registry Credentials'}
-                    fieldName={'container_registry_credentials'}
+                    fieldName={'credential'}
                     setFieldValue={formik?.setFieldValue}
-                    fieldValue={''}
-                    options={[]}
-                    onChange={() => {}}
+                    fieldValue={formik.values.credential}
+                    options={credentials}
                     optionSize={'small'}
                     size={'small'}
                     labelGap={2}

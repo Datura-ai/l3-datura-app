@@ -6,6 +6,8 @@ import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCreateTemplateService } from 'services/template/useTemplateService'
 import { TemplateInput } from 'types/template'
+import { useGetCredentials } from 'services/credential/useCredentialService'
+import { Credential } from 'types/credential'
 
 const validationSchema = yup.object().shape({
     container_image: yup.string().required('Please enter container image'),
@@ -19,6 +21,7 @@ const useCreateTemplate = () => {
     const navigate = useNavigate()
 
     const { createTemplate, loading: create_template_loading } = useCreateTemplateService()
+    const { data: credentials } = useGetCredentials()
 
     const formik = useFormik({
         initialValues: { 
@@ -34,6 +37,7 @@ const useCreateTemplate = () => {
             volume_mount_path: '',
             expose_http_ports: '',
             expose_tcp_ports: '',
+            credential: '',
             environment_variables: {
                 env: []
             },
@@ -64,9 +68,12 @@ const useCreateTemplate = () => {
         }
     }
 
+    const credentialsList = credentials.map((item: Credential) => ({ label: item.credential_name, value: item.id }))
+
     return {
         formik,
         create_template_loading,
+        credentials: credentialsList,
     }
 }
 
