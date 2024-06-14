@@ -21,7 +21,7 @@ class CredentialModel(BaseModel):
     __tablename__ = "credential"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    secret_name = Column(String, nullable=False)
+    credential_name = Column(String, nullable=False)
     user_name = Column(String, nullable=False)
     password = Column(String, nullable=False)
 
