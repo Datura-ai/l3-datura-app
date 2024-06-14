@@ -12,7 +12,7 @@ from typings.credential import (
 router = APIRouter()
 
 
-@router.get("", response_model=CredentialOutput, status_code=200)
+@router.get("", response_model=list[CredentialOutput], status_code=200)
 def get_credentials(auth: UserAccount = Depends(authenticate)):
     """
     Get all credentials associated with the authenticated user account.
@@ -61,6 +61,7 @@ def create_credential(
         credential = CredentialModel.create_credential(
             db=db,
             credential=input,
+            user=auth.user,
             account=auth.account
         )
 

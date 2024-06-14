@@ -13,6 +13,11 @@ class CredentialOutput(BaseModel):
     id: UUID
     credential_name: str
     created_on: datetime
+    account_id: UUID
+    created_by: UUID
+
+    class Config:
+        orm_mode = True
 
 
 class CredentialActionOutput(BaseModel):
