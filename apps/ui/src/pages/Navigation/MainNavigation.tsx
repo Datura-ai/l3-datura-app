@@ -26,7 +26,7 @@ import Integrations from 'share-ui/components/Icon/Icons/components/integrations
 import FineTuning from 'share-ui/components/Icon/Icons/components/FineTuning'
 // eslint-disable-next-line import/no-named-as-default
 import Cloud from 'share-ui/components/Icon/Icons/components/Cloud'
-import { AddOutline, DollarOutline } from 'share-ui/components/Icon/Icons'
+import { AddOutline, DollarOutline, Locked } from 'share-ui/components/Icon/Icons'
 
 import ModeSwitcher from 'components/ModeSwitcher'
 import { useAppModeContext } from 'context/AppModeContext'
@@ -232,6 +232,29 @@ const MainNavigation = () => {
           </StyledLi>
         </Tooltip>
 
+        {computeMode && (
+          <Tooltip content={t('Templates')} position={Tooltip.positions.LEFT}>
+            <StyledLi
+              isActive={includes(active, 'templates')}
+              onClick={() => onHandleClick('/templates')}
+            >
+              <StyledBillingIcon picked={includes(active, 'templates')} />
+              {includes(active, 'templates') && <StyledCorner />}
+            </StyledLi>
+          </Tooltip>
+        )}
+        {computeMode && (
+          <Tooltip content={t('Secrets')} position={Tooltip.positions.LEFT}>
+            <StyledLi
+              isActive={includes(active, 'secrets')}
+              onClick={() => onHandleClick('/secrets')}
+            >
+              <StyledSecretsIcon size={30} picked={includes(active, 'secrets')} />
+              {includes(active, 'secrets') && <StyledCorner />}
+            </StyledLi>
+          </Tooltip>
+        )}
+
         {/* {isDiscover && (
           <Tooltip content={t('discover')} position={Tooltip.positions.LEFT}>
             <StyledLi
@@ -312,7 +335,7 @@ const StyledLi = styled.li<{ isActive?: boolean }>`
 
   cursor: pointer;
 
-  ${({ isActive, theme }) =>
+  ${({ isActive }) =>
     isActive &&
     `
     opacity: 1;
@@ -395,6 +418,7 @@ export const StyledCloudOutlineIcon = styled(Cloud)`
     fill: ${({ theme }) => theme.body.iconColor};
   }
 `
+
 const StyledBottomSection = styled.div`
   margin-top: auto;
 
@@ -438,6 +462,12 @@ const StyledAPIIcon = styled(Key)<{ picked: boolean }>`
 `
 
 const StyledBillingIcon = styled(DollarOutline)<{ picked: boolean }>`
+  path {
+    fill: ${({ theme, picked }) => (picked ? '#FFF' : theme.body.iconColor)};
+    stroke: ${({ theme, picked }) => (picked ? '#FFF' : theme.body.iconColor)};
+  }
+`
+const StyledSecretsIcon = styled(Locked)<{ picked: boolean }>`
   path {
     fill: ${({ theme, picked }) => (picked ? '#FFF' : theme.body.iconColor)};
     stroke: ${({ theme, picked }) => (picked ? '#FFF' : theme.body.iconColor)};
