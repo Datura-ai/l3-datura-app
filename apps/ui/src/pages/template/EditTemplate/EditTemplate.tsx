@@ -14,13 +14,17 @@ import TemplateForm from '../components/TemplateForm'
 import useEditTemplate from './useEditTemplate'
 
 const EditTemplate = () => {
-    const { formik, update_template_loading} = useEditTemplate()
+    const { formik, update_template_loading, credentials } = useEditTemplate()
     return (
         <FormikProvider value={formik}>
             <StyledSectionWrapper>
 
                 <StyledFormRoot>
-                    <TemplateForm formik={formik} label="Edit Template" />
+                    <TemplateForm 
+                        formik={formik} 
+                        label="Edit Template" 
+                        credentials={credentials}
+                    />
                 </StyledFormRoot>
                 <StyledButtonWrapper>
                     <ButtonPrimary

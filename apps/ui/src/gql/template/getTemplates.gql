@@ -14,6 +14,7 @@ query getTemplates @api(name: "ai") {
     expose_tcp_ports
     template_visibility
     environment_variables
+    credential
     account_id
     created_by
     created_on
