@@ -1,3 +1,4 @@
+import styled from 'styled-components'
 import { FormikProvider } from 'formik'
 import {
   StyledHeaderGroup,
@@ -20,7 +21,6 @@ import {
   StyledMainWrapper,
 } from 'routes/ChatRouteLayout'
 import { StyledAppContainer } from 'components/Layout/LayoutStyle'
-import styled from 'styled-components'
 
 const CreateSecret = () => {
   const { formik, create_secret_loading } = useCreateSecret()
@@ -88,7 +88,7 @@ const CreateSecret = () => {
 
 export default CreateSecret
 
-const StyledFormWrapper = styled.div`
+export const StyledFormWrapper = styled.div`
   width: 100%;
   height: 100%;
 
