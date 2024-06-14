@@ -27,3 +27,6 @@ export const StyledFormInputWrapper = styled.div`
 
   height: 100%;
 `
+export const StyledHeaderTextWrapper = styled.div`
+  width: 100%;
+`

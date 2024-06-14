@@ -1,1 +1,1 @@
-export { default } from './Billnig'
+export { default } from './Billing'

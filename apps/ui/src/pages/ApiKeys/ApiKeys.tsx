@@ -5,9 +5,9 @@ import columnConfig from './columnConfig'
 
 import Button from 'share-ui/components/Button/Button'
 import Table from 'components/Table'
-import Add from 'share-ui/components/Icon/Icons/components/Add'
+
 import Heading from 'share-ui/components/Heading/Heading'
-import Typography from 'share-ui/components/typography/Typography'
+
 import { useNavigate } from 'react-router-dom'
 
 import useApiKeys from './useApiKeys'
@@ -140,8 +140,7 @@ export const StyledTypography = styled.div`
   position: relative;
   justify-content: flex-start;
   align-items: center;
-  height: 28px;
-  // color: rgba(255, 255, 255, 0.6);
+
   @media (max-width: 1209px) {
     margin-left: auto;
     margin-top: auto;
@@ -151,7 +150,7 @@ export const StyledTypography = styled.div`
   }
 `
 export const StyledTypographyWrapper = styled.div`
-  border-bottom: 1px solid ${({ theme }) => theme.body.textColorPrimary};
+  text-decoration: underline;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,7 +158,8 @@ export const StyledTypographyWrapper = styled.div`
   min-width: 30px;
   height: 20px;
   margin-left: 10px;
-  // color: #ffffff;
+  margin-bottom: 5px;
+
   @media (max-width: 320px) {
     margin-left: auto;
     margin-top: auto;

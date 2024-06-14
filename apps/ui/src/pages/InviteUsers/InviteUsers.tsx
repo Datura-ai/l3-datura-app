@@ -36,7 +36,7 @@ const InviteUsers = () => {
           <StyledChatWrapper>
             <StyledTabsWrapper>
               <TabList size='small' activeTabId={activeTab} noBorder>
-                <Tab onClick={() => handleTabClick(0)}>Invite Users</Tab>
+                <Tab onClick={() => handleTabClick(0)}>Teams</Tab>
                 <Tab onClick={() => handleTabClick(1)}>Access</Tab>
               </TabList>
               <StyledHeaderGroup className='header_group'>
