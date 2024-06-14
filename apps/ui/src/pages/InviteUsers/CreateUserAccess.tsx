@@ -1,9 +1,9 @@
 import { FormikProvider } from 'formik'
 import {
-    StyledHeaderGroup,
-    StyledSectionTitle,
-    StyledSectionWrapper,
-  } from 'pages/Home/homeStyle.css'
+  StyledHeaderGroup,
+  StyledSectionTitle,
+  StyledSectionWrapper,
+} from 'pages/Home/homeStyle.css'
 import BackButton from 'components/BackButton'
 import { ButtonPrimary } from 'components/Button/Button'
 import ComponentsWrapper from 'components/ComponentsWrapper/ComponentsWrapper'
@@ -15,41 +15,40 @@ import Button from 'share-ui/components/Button/Button'
 import Loader from 'share-ui/components/Loader/Loader'
 import useInviteUsers from './useInviteUsers'
 
-
 const CreateUserAccess = () => {
   const { t } = useTranslation()
   const { formik, create_access_loading } = useInviteUsers()
 
-    return (
-        <FormikProvider value={formik}>
-        <StyledSectionWrapper>
-          <StyledHeaderGroup className='header_group'>
-              <StyledSectionTitle>Invite user</StyledSectionTitle>
+  return (
+    <FormikProvider value={formik}>
+      <StyledSectionWrapper>
+        <StyledHeaderGroup className='header_group'>
+          <StyledSectionTitle>Teams</StyledSectionTitle>
 
-            <div>
-              <BackButton />
-              <ButtonPrimary
-                onClick={formik.handleSubmit}
-                size={Button.sizes?.SMALL}
-                disabled={create_access_loading}
-              >
-                {create_access_loading ? <Loader size={32} /> : 'Save'}
-              </ButtonPrimary>
-            </div>
-          </StyledHeaderGroup>
+          <div>
+            <BackButton />
+            <ButtonPrimary
+              onClick={formik.handleSubmit}
+              size={Button.sizes?.SMALL}
+              disabled={create_access_loading}
+            >
+              {create_access_loading ? <Loader size={32} /> : 'Save'}
+            </ButtonPrimary>
+          </div>
+        </StyledHeaderGroup>
 
-          <ComponentsWrapper noPadding>
-            <StyledFormWrapper>
-                <StyledFormContainer>
-                    <StyledInputWrapper>
-                        <FormikTextField name='email' placeholder={t('email')} label={t('email')} />
-                    </StyledInputWrapper>
-                </StyledFormContainer>
-            </StyledFormWrapper>
-          </ComponentsWrapper>
-        </StyledSectionWrapper>
-      </FormikProvider>
-    )
+        <ComponentsWrapper noPadding>
+          <StyledFormWrapper>
+            <StyledFormContainer>
+              <StyledInputWrapper>
+                <FormikTextField name='email' placeholder={t('email')} label={t('email')} />
+              </StyledInputWrapper>
+            </StyledFormContainer>
+          </StyledFormWrapper>
+        </ComponentsWrapper>
+      </StyledSectionWrapper>
+    </FormikProvider>
+  )
 }
 
 export default CreateUserAccess
