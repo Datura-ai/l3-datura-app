@@ -1,7 +1,7 @@
 import { StyledChatWrapper, StyledContainer, StyledMainWrapper } from 'routes/ChatRouteLayout'
 import { StyledAppContainer } from 'components/Layout/LayoutStyle'
 import { StyledTableWrapper } from 'pages/Billing/panels/Transactions'
-import styled from 'styled-components'
+
 import {
   StyledHeaderGroup,
   StyledSectionDescription,
@@ -44,9 +44,3 @@ const Secrets = () => {
 }
 
 export default Secrets
-
-const StyledTabsWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: end;
-`
