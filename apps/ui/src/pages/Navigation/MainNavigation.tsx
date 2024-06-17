@@ -31,6 +31,7 @@ import { AddOutline, BoardTemplate, DollarOutline, Locked } from 'share-ui/compo
 import ModeSwitcher from 'components/ModeSwitcher'
 import { useAppModeContext } from 'context/AppModeContext'
 import Key from 'share-ui/components/Icon/Icons/components/Key'
+import Credentials from 'share-ui/components/Icon/Icons/components/Credentials'
 
 const MainNavigation = () => {
   const { computeMode, subnetMode } = useAppModeContext()
@@ -231,6 +232,17 @@ const MainNavigation = () => {
             >
               <StyledSecretsIcon size={30} picked={includes(active, 'secrets')} />
               {includes(active, 'secrets') && <StyledCorner />}
+            </StyledLi>
+          </Tooltip>
+        )}
+        {computeMode && (
+          <Tooltip content={t('Credentials')} position={Tooltip.positions.LEFT}>
+            <StyledLi
+              isActive={includes(active, 'credentials')}
+              onClick={() => onHandleClick('/credentials')}
+            >
+              <StyledCredentialsIcon size={30} picked={includes(active, 'credentials')} />
+              {includes(active, 'credentials') && <StyledCorner />}
             </StyledLi>
           </Tooltip>
         )}
@@ -476,6 +488,12 @@ const StyledSecretsIcon = styled(Locked)<{ picked: boolean }>`
 `
 
 const StyledTemplateIcon = styled(BoardTemplate)<{ picked: boolean }>`
+  path {
+    fill: ${({ theme, picked }) => (picked ? '#FFF' : theme.body.iconColor)};
+    stroke: transparent;
+  }
+`
+const StyledCredentialsIcon = styled(Credentials)<{ picked: boolean }>`
   path {
     fill: ${({ theme, picked }) => (picked ? '#FFF' : theme.body.iconColor)};
     stroke: transparent;
