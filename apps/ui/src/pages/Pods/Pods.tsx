@@ -11,11 +11,14 @@ import { useNavigate, useOutlet } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { usePod } from './usePods'
+import { capitalizeFirstLetter } from 'share-ui/utils/capitalizeFirstLetter'
 
 const Pods = () => {
   const { pods } = usePod()
   const navigate = useNavigate()
   const outlet = useOutlet()
+
+  console.log('pods', pods)
 
   return (
     <StyledAppContainer>
@@ -69,13 +72,13 @@ const Pods = () => {
                           fontSize={13}
                           fontWeight={500}
                           sx={{
-                            color: item.running ? '#17C568' : '#EF5533',
-                            background: item.running ? '#F1FEED' : '#FCEAEC',
+                            color: item.status ? '#17C568' : '#EF5533',
+                            background: item.status ? '#F1FEED' : '#FCEAEC',
                             padding: '4px 15px',
                             borderRadius: '8px',
                           }}
                         >
-                          {item.running ? 'Running' : 'Stopped'}
+                          {capitalizeFirstLetter(item.status)}
                         </Typography>
                       </Box>
                     </Box>
