@@ -8,7 +8,7 @@ import IconButton from 'share-ui/components/IconButton/IconButton'
 import styled from 'styled-components'
 import { StyledFormInputWrapper } from 'styles/formStyles.css'
 import { StyledButtonsWrapper } from 'styles/globalStyle.css'
-import { StyledEditIcon } from './PodsMainCard'
+import { StyledDeleteIcon, StyledEditIcon } from './PodsMainCard'
 
 const PodDetails = () => {
   const [play, setPlay] = useState(false)
@@ -64,7 +64,7 @@ const PodDetails = () => {
                 {play ? <Pause /> : <Play />}
               </ButtonPrimary>
               <ButtonSecondary size='small'>
-                <StyledDelete />
+                <StyledDeleteIcon />
               </ButtonSecondary>
               <ButtonSecondary size='small'>
                 <TypographyPrimary value='Logs' size='small' semiBold />
@@ -110,11 +110,7 @@ const StyledBurgerMenu = styled(BurgerMenu)`
     stroke: ${({ theme }) => theme.body.iconColor};
   }
 `
-const StyledDelete = styled(Delete)`
-  path {
-    stroke: ${({ theme }) => theme.body.iconColor};
-  }
-`
+
 const StyledPriceTag = styled.div`
   border-radius: 10px;
   border: 1px solid #b6b6b6;
