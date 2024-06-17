@@ -235,15 +235,17 @@ const MainNavigation = () => {
           </Tooltip>
         )}
 
-        <Tooltip content={t('api-keys')} position={Tooltip.positions.LEFT}>
-          <StyledLi
-            isActive={includes(active, 'api-key')}
-            onClick={() => onHandleClick('/api-key')}
-          >
-            <StyledAPIIcon size={40} picked={includes(active, 'api-key')} />
-            {includes(active, 'api-key') && <StyledCorner />}
-          </StyledLi>
-        </Tooltip>
+        {subnetMode && (
+          <Tooltip content={t('api-keys')} position={Tooltip.positions.LEFT}>
+            <StyledLi
+              isActive={includes(active, 'api-key')}
+              onClick={() => onHandleClick('/api-key')}
+            >
+              <StyledAPIIcon size={40} picked={includes(active, 'api-key')} />
+              {includes(active, 'api-key') && <StyledCorner />}
+            </StyledLi>
+          </Tooltip>
+        )}
 
         <Tooltip content={t('Billing')} position={Tooltip.positions.LEFT}>
           <StyledLi
