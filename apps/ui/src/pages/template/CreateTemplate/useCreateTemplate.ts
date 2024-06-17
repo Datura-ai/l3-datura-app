@@ -4,7 +4,7 @@ import * as yup from 'yup'
 
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useCreateTemplateService } from 'services/template/useTemplateService'
+import { useCreateTemplateService, useGetTemplates } from 'services/template/useTemplateService'
 import { TemplateInput } from 'types/template'
 import { useGetCredentials } from 'services/credential/useCredentialService'
 import { Credential } from 'types/credential'
@@ -20,6 +20,7 @@ const useCreateTemplate = () => {
   const navigate = useNavigate()
 
   const { createTemplate, loading: create_template_loading } = useCreateTemplateService()
+  const { refetch: refetchTemplates } = useGetTemplates()
   const { data: credentials } = useGetCredentials()
 
   const formik = useFormik({
@@ -53,6 +54,7 @@ const useCreateTemplate = () => {
       },
     }
     const result = await createTemplate(data)
+    await refetchTemplates()
 
     if (result) {
       setToast({
@@ -62,7 +64,7 @@ const useCreateTemplate = () => {
       })
 
       if (result.success) {
-        navigate(`/templates`)
+        navigate(`/templates/edit/${result.id}`)
       }
     }
   }

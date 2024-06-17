@@ -84,7 +84,8 @@ def create_template(
 
         return {
                 "success": True,
-                "message": "Template created successfully"
+                "message": "Template created successfully",
+                "id": pod.id
             }
 
     except Exception as e:

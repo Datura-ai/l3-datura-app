@@ -23,6 +23,7 @@ class TemplateVisibilityEnum(str, Enum):
 
 
 class CreateTemplateOutput(BaseModel):
+    id: Optional[UUID]
     success: bool
     message: str
 

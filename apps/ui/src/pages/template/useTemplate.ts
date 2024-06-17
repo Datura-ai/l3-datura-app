@@ -28,7 +28,7 @@ const useTemplate = () => {
         deleteItem: async () => {
           try {
             await deleteTemplate(id)
-            refetch()
+            await refetch()
             closeModal('delete-confirmation-modal')
             setToast({
               message: 'Template was deleted!',
@@ -59,6 +59,7 @@ const useTemplate = () => {
     handleDeleteTemplate,
     delete_template_loading,
     handleEditTemplate,
+    navigate,
   }
 }
 

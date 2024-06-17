@@ -11,7 +11,7 @@ import {
   StyledEditIcon,
 } from 'pages/TeamOfAgents/TeamOfAgentsCard/TeamOfAgentsCard'
 import { Template } from 'types/template'
-import { useEffect } from 'react'
+
 import { useParams } from 'react-router-dom'
 
 const TemplateList = () => {
@@ -24,12 +24,6 @@ const TemplateList = () => {
   } = useTemplate()
 
   const params = useParams()
-
-  useEffect(() => {
-    if (templates?.length > 0) {
-      handleEditTemplate(templates[0].id)
-    }
-  }, [templates])
 
   return (
     <Box position={'relative'}>
