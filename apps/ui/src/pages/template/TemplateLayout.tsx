@@ -12,7 +12,7 @@ import Box from '@mui/material/Box'
 
 import TemplateList from './TemplateList'
 import useTemplate from './useTemplate'
-import { useEffect } from 'react'
+
 import Loader from 'share-ui/components/Loader/Loader'
 import { StyledAbsoluteLoaderWrapper } from 'styles/formStyles.css'
 
@@ -20,7 +20,7 @@ const TemplateLayout = () => {
   const navigate = useNavigate()
   const outlet = useOutlet()
 
-  const { templates, handleEditTemplate, template_loading } = useTemplate()
+  const { templates, template_loading } = useTemplate()
 
   return (
     <StyledAppContainer>

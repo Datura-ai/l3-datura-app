@@ -1,7 +1,7 @@
 import { ToastContext } from 'contexts'
 import { useModal } from 'hooks'
 import React, { useContext } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useGetTemplates, useDeleteTemplateService } from 'services/template/useTemplateService'
 
 const useTemplate = () => {
@@ -9,6 +9,7 @@ const useTemplate = () => {
   const { openModal, closeModal } = useModal()
   const location = useLocation()
   const navigate = useNavigate()
+  const params = useParams()
 
   const { data: templates, loading: template_loading, refetch } = useGetTemplates()
   const { deleteTemplate, loading: delete_template_loading } = useDeleteTemplateService()
@@ -29,6 +30,7 @@ const useTemplate = () => {
           try {
             await deleteTemplate(id)
             await refetch()
+            if (params.id === id) navigate('/templates/create-template')
             closeModal('delete-confirmation-modal')
             setToast({
               message: 'Template was deleted!',
