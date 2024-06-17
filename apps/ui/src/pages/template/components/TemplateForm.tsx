@@ -16,6 +16,8 @@ import LockOpenIcon from '@mui/icons-material/LockOpen'
 
 import EnvVariables from './EnvVariables'
 
+import RadioButton from 'share-ui/components/RadioButton/RadioButton'
+
 const black = '#000000'
 const white = 'rgb(255, 255, 255)'
 
@@ -30,6 +32,8 @@ interface TemplateFormProps {
 
 const TemplateForm = ({ formik, label, credentials }: TemplateFormProps) => {
   const [env_is_open, setEnvIsOpen] = React.useState(false)
+  console.log('formik.values.template_visibility', formik.values.template_visibility)
+
   return (
     <StyledFormInputWrapper>
       <Typography fontSize={20} fontWeight={600}>
@@ -123,60 +127,23 @@ const TemplateForm = ({ formik, label, credentials }: TemplateFormProps) => {
           label={'Expose TCP Ports'}
         />
       </Box>
-      <Box display={'flex'} flexDirection={'column'}>
+      <Box display={'flex'} flexDirection={'column'} gap={1}>
         <Typography>Template Visibility</Typography>
-        <ToggleButtonGroup
-          color='primary'
-          value={formik.values.template_visibility}
-          exclusive
-          onChange={(e, value) => {
-            if (value) {
-              formik.setFieldValue('template_visibility', value)
-            }
-          }}
-          aria-label='Platform'
-          sx={{
-            '.css-k9c1x3-MuiButtonBase-root-MuiToggleButton-root.Mui-selected': {
-              color: white,
-              background: black,
-            },
-            '.css-t22hm5-MuiButtonBase-root-MuiToggleButton-root.Mui-selected': {
-              color: white,
-              background: black,
-            },
-          }}
-        >
-          <ToggleButton
-            value='public'
-            size='small'
-            sx={{
-              borderTopLeftRadius: '10px',
-              borderBottomLeftRadius: '10px',
-              fontWeight: 600,
-            }}
-          >
-            <LockOpenIcon fontSize='small' />
-            <Typography sx={{ marginLeft: '5px' }} fontSize={14}>
-              PUBLIC
-            </Typography>
-          </ToggleButton>
 
-          <ToggleButton
-            value='private'
-            size='small'
-            sx={{
-              border: '1px solid rgba(0, 0, 0, 0.12)',
-              borderTopRightRadius: '10px',
-              borderBottomRightRadius: '10px',
-              fontWeight: 600,
-            }}
-          >
-            <LockIcon fontSize='small' />
-            <Typography sx={{ marginLeft: '5px' }} fontSize={14}>
-              PRIVATE
-            </Typography>
-          </ToggleButton>
-        </ToggleButtonGroup>
+        <Box display={'flex'} flexDirection={'row'} gap={1}>
+          <RadioButton
+            text={'Public'}
+            name='template_visibility'
+            onSelect={() => formik.setFieldValue('template_visibility', ['public'])}
+            checked={formik.values.template_visibility?.includes('public')}
+          />
+          <RadioButton
+            text={'Private'}
+            name='template_visibility'
+            onSelect={() => formik.setFieldValue('template_visibility', ['private'])}
+            checked={formik.values.template_visibility?.includes('private')}
+          />
+        </Box>
       </Box>
 
       <Box>

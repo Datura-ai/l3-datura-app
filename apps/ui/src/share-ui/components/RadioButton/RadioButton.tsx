@@ -121,6 +121,7 @@ const RadioButton: L3Component<RadioButtonProps, HTMLElement> = forwardRef(
                     `${baseClassName}__radio-label--kind-${kind}`,
                     `${baseClassName}__radio-label--size-${size}`,
                   )}
+                  style={{ cursor: 'pointer' }}
                 >
                   {text}
                 </span>
@@ -207,7 +208,7 @@ const StyledControl = styled.div<{ checked: boolean }>`
       border-color: #4ca6f8;
       border-width: 6px;
 
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
     `}
 `

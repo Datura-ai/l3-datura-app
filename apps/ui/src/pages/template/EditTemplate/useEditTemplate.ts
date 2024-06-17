@@ -57,7 +57,7 @@ const useEditTemplate = () => {
     const data = {
       ...values,
       environment_variables: {
-        env: values.environment_variables.env.filter(i => i.key && i.value),
+        env: values?.environment_variables?.env?.filter(i => i.key && i.value) || [],
       },
     }
     const result = await updateTemplate(id, data)
