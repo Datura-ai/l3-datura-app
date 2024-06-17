@@ -26,7 +26,7 @@ const TemplateList = () => {
   const params = useParams()
 
   useEffect(() => {
-    if (templates?.length > 0 && !params?.id?.length) {
+    if (templates?.length > 0) {
       handleEditTemplate(templates[0].id)
     }
   }, [templates])
@@ -51,7 +51,9 @@ const TemplateList = () => {
               cursor: 'pointer',
               boxShadow: '0px 2px 4px 0px rgba(0, 0, 0, 0.1)',
               '&:hover': {
-                backgroundColor: 'rgb(250, 250, 250)',
+                ...(params?.id === item.id
+                  ? { backgroundColor: 'rgba(50, 50, 50, 0.1)' }
+                  : { backgroundColor: 'rgb(250, 250, 250)' }),
               },
               ...(params?.id === item.id ? { backgroundColor: 'rgba(50, 50, 50, 0.1)' } : {}),
               ...(params?.id === item.id
