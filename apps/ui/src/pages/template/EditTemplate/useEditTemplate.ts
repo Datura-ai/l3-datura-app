@@ -34,7 +34,7 @@ const useEditTemplate = () => {
     container_start_command: data?.container_start_command || '',
     container_image: data?.container_image || '',
     container_disk: data?.container_disk || 5,
-    volume_disk: data?.volume_disk || '',
+    volume_disk: data?.volume_disk || 0,
     volume_mount_path: data?.volume_mount_path || '',
     expose_http_ports: data?.expose_http_ports || '',
     expose_tcp_ports: data?.expose_tcp_ports || '',

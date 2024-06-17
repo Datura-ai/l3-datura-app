@@ -32,7 +32,7 @@ const useCreateTemplate = () => {
       container_start_command: '',
       container_image: '',
       container_disk: 5,
-      volume_disk: '',
+      volume_disk: 0,
       volume_mount_path: '',
       expose_http_ports: '',
       expose_tcp_ports: '',
