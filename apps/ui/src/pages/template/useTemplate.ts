@@ -20,7 +20,8 @@ const useTemplate = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
 
-  const handleDeleteTemplate = (id: string) => {
+  const handleDeleteTemplate = (event: React.MouseEvent<Element, MouseEvent>, id: string) => {
+    event.stopPropagation()
     openModal({
       name: 'delete-confirmation-modal',
       data: {
@@ -28,9 +29,7 @@ const useTemplate = () => {
           try {
             await deleteTemplate(id)
             refetch()
-            navigate(`/templates`)
             closeModal('delete-confirmation-modal')
-
             setToast({
               message: 'Template was deleted!',
               type: 'positive',
@@ -60,7 +59,6 @@ const useTemplate = () => {
     handleDeleteTemplate,
     delete_template_loading,
     handleEditTemplate,
-    navigate,
   }
 }
 

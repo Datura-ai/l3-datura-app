@@ -21,16 +21,13 @@ const TemplateList = () => {
     handleDeleteTemplate,
     delete_template_loading,
     handleEditTemplate,
-    navigate,
   } = useTemplate()
 
   const params = useParams()
 
   useEffect(() => {
-    if (templates?.length > 0) {
+    if (templates?.length > 0 && !params?.id?.length) {
       handleEditTemplate(templates[0].id)
-    } else {
-      navigate('/templates/create-template')
     }
   }, [templates])
 
@@ -105,7 +102,9 @@ const TemplateList = () => {
                     ariaLabel='Edit'
                   />
                   <IconButton
-                    onClick={() => handleDeleteTemplate(item.id)}
+                    onClick={(event: React.MouseEvent<Element, MouseEvent>) =>
+                      handleDeleteTemplate(event, item.id)
+                    }
                     icon={() => <StyledDeleteIcon />}
                     size={IconButton.sizes?.SMALL}
                     kind={IconButton.kinds?.TERTIARY}
