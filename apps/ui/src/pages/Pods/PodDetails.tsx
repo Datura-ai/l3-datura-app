@@ -4,9 +4,11 @@ import TypographySecondary from 'components/Typography/Secondary'
 import CardWrapper from 'components/wrappers/CardWrapper'
 import { useState } from 'react'
 import { BurgerMenu, Delete, Pause, Play } from 'share-ui/components/Icon/Icons'
+import IconButton from 'share-ui/components/IconButton/IconButton'
 import styled from 'styled-components'
 import { StyledFormInputWrapper } from 'styles/formStyles.css'
 import { StyledButtonsWrapper } from 'styles/globalStyle.css'
+import { StyledEditIcon } from './PodsMainCard'
 
 const PodDetails = () => {
   const [play, setPlay] = useState(false)
@@ -19,7 +21,16 @@ const PodDetails = () => {
         <StyledInnerWrapper>
           <StyledHeader>
             <StyledColumn>
-              <TypographyPrimary value='TEST NAME' semiBold size='large' />
+              <StyledNameWrapper>
+                <TypographyPrimary value='TEST NAME' semiBold size='large' />
+                <IconButton
+                  onClick={() => {}}
+                  icon={() => <StyledEditIcon />}
+                  size={IconButton.sizes?.SMALL}
+                  kind={IconButton.kinds?.TERTIARY}
+                  ariaLabel='Edit Template'
+                />
+              </StyledNameWrapper>
               <TypographySecondary value='ID: hgf6h5df1sdgffd' size='medium' />
             </StyledColumn>
 
@@ -108,4 +119,9 @@ const StyledPriceTag = styled.div`
   border-radius: 10px;
   border: 1px solid #b6b6b6;
   padding: 4px 8px;
+`
+const StyledNameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `
