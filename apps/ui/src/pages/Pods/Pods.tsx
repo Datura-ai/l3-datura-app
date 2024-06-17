@@ -18,8 +18,6 @@ const Pods = () => {
   const navigate = useNavigate()
   const outlet = useOutlet()
 
-  console.log('pods', pods)
-
   return (
     <StyledAppContainer>
       <StyledContainer>
@@ -36,6 +34,7 @@ const Pods = () => {
               {pods.map((item, index: number) => (
                 <>
                   <Box
+                    onClick={() => navigate('/pods/details')}
                     key={index}
                     display={'flex'}
                     mt={1}

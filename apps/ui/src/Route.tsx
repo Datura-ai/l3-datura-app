@@ -116,6 +116,7 @@ import Billing from 'pages/Billing'
 import CreateNewApp from 'pages/CreateNewApp'
 import { Secrets, CreateSecret, SecretDetails } from 'pages/Secrets'
 import Credentials from 'pages/Credentials'
+import PodDetails from 'pages/Pods/PodDetails'
 
 const Route = () => {
   const { loading } = useContext(AuthContext)
@@ -436,6 +437,7 @@ const Route = () => {
                   element={<PodsContent />}
                   key={document.location.href}
                 />
+                <Router path={'details'} element={<PodDetails />} key={document.location.href} />
               </Router>
 
               <Router path='templates' element={<TemplateLayout />} key={document.location.href}>
@@ -455,16 +457,11 @@ const Route = () => {
                   element={<CreateSecret />}
                   key={document.location.href}
                 />
-                <Router
-                  path={':id'}
-                  element={<SecretDetails />}
-                  key={document.location.href}
-                />
+                <Router path={':id'} element={<SecretDetails />} key={document.location.href} />
               </Router>
               <Router path='credentials' key={document.location.href}>
                 <Router index element={<Credentials />} key={document.location.href} />
               </Router>
-          
 
               <Router path={'developers'} element={<DevelopersRouteLayout />}>
                 <Router index element={<ApiKeys />} key={document.location.href} />

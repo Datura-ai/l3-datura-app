@@ -32,7 +32,6 @@ interface TemplateFormProps {
 
 const TemplateForm = ({ formik, label, credentials }: TemplateFormProps) => {
   const [env_is_open, setEnvIsOpen] = React.useState(false)
-  console.log('formik.values.template_visibility', formik.values.template_visibility)
 
   return (
     <StyledFormInputWrapper>

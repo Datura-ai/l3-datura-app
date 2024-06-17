@@ -216,13 +216,11 @@ const StyledBox = styled.div`
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
+
   gap: 27px;
   max-width: 80rem;
   margin-right: auto;
-  @media (min-width: 960px) {
-    padding-left: 36px;
-    padding-right: 36px;
-  }
+  padding: 0 20px;
 `
 
 const StyledLineContainer = styled.div`
