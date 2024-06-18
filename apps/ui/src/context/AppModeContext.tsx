@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react'
 
 import type { ReactNode } from 'react'
+import { useGetAccounts } from 'services/Account/useAccountService'
 
 type AppModeContextType = {
   mode: Option
@@ -8,6 +9,7 @@ type AppModeContextType = {
   computeMode: boolean
   subnetMode: boolean
   options: Option[]
+  accounts: Option[]
 }
 
 export type Option = {
@@ -36,6 +38,10 @@ type AppModeContextProviderProps = {
 }
 
 export function AppModeContextProvider({ children }: AppModeContextProviderProps): JSX.Element {
+  const { data: accounts } = useGetAccounts()
+
+  console.log('accounts', accounts)
+
   const [mode, setMode] = useState<Option>(() => {
     const savedMode = localStorage.getItem('appModeStorage')
     return savedMode ? JSON.parse(savedMode) : MODE_OPTIONS[0]
@@ -49,12 +55,17 @@ export function AppModeContextProvider({ children }: AppModeContextProviderProps
     setMode(newMode)
   }
 
+  const accountOptions = accounts.map((account: any) => ({ type: 'subnet_api', name: account.name, icon: account?.configs?.icon }))
+
+  console.log('accountOptions', accountOptions)
+
   const value: AppModeContextType = {
     mode,
     setMode: saveModeToLocal,
     computeMode,
     subnetMode,
     options: MODE_OPTIONS,
+    accounts: accountOptions
   }
 
   return <AppModeContext.Provider value={value}>{children}</AppModeContext.Provider>
