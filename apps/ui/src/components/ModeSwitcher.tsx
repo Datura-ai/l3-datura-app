@@ -1,7 +1,7 @@
 import TypographyPrimary from './Typography/Primary'
 
 import { Content, Item, Root, Trigger } from '@radix-ui/react-dropdown-menu'
-import { useAppModeContext } from 'context/AppModeContext'
+import { account_mode_icon, useAppModeContext } from 'context/AppModeContext'
 import { Check, Switcher } from 'share-ui/components/Icon/Icons'
 import styled from 'styled-components'
 import { StyledAddIcon } from 'pages/Navigation/MainNavigation'
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ModeSwitcher = () => {
   const navigate = useNavigate()
-  const { mode, setMode, options, accounts } = useAppModeContext()
+  const { mode, setMode, accounts } = useAppModeContext()
 
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [showDropdownValue, setShowDropdownValue] = useState(false)
@@ -19,7 +19,7 @@ const ModeSwitcher = () => {
     if (isDropdownOpen) {
       const timer = setTimeout(() => {
         setShowDropdownValue(true)
-      }, 100) // Delay in milliseconds
+      }, 100)
       return () => clearTimeout(timer)
     } else {
       setShowDropdownValue(false)
@@ -45,10 +45,10 @@ const ModeSwitcher = () => {
             {accounts.map(option => {
               return (
                 <StyledDropDownMenuItem key={option.type} onClick={() => setMode(option)}>
-                  <StyledImg src={option.icon} />
+                  <StyledImg src={account_mode_icon[option.type]} />
 
                   <TypographyPrimary value={option.name} size={'small'} semiBold />
-                  {mode.type === option.type && <StyledCheck />}
+                  {mode.id === option.id && <StyledCheck />}
                 </StyledDropDownMenuItem>
               )
             })}
