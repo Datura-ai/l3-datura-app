@@ -3,17 +3,18 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from utils.auth import authenticate
 from typings.auth import UserAccount
 from models.resource import ResourceModel
-from typings.resource import ResourceOutput, ResourceInput
+from typings.resource import ResourceOutput, ResourceInput, ResourceFilterInput
+from typing import Optional
 
 router = APIRouter()
 
 
 @router.get(
-    "",
+    "/{filters}",
     response_model=list[ResourceOutput],
     status_code=200
 )
-def get_resources():
+def get_resources(filters: str):
     """_summary_
 
     Raises:
@@ -23,7 +24,8 @@ def get_resources():
         _type_: _description_
     """
     try:
-        data = ResourceModel.get_resources(db=db)
+        print('filters', filters)
+        data = ResourceModel.get_resources(db=db, filters={})
 
         data_to_list = [ResourceOutput.from_orm(resource) for resource in data]
 
