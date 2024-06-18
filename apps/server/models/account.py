@@ -106,6 +106,7 @@ class AccountModel(BaseModel):
                     AccountModel.is_deleted is None,
                 )
             )
+            .order_by(AccountModel.created_on.asc())
             .all()
         )
         return accounts
@@ -142,6 +143,7 @@ class AccountModel(BaseModel):
                     AccountModel.is_deleted is None,
                 ),
             )
+            .order_by(AccountModel.created_on.asc())
             .first()
         )
         return accounts
