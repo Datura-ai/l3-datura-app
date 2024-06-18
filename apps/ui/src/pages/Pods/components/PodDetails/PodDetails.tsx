@@ -8,6 +8,8 @@ import TabsContext from 'share-ui/components/Tabs/TabsContext/TabsContext'
 import TabPanels from 'share-ui/components/Tabs/TabPanels/TabPanels'
 import TabPanel from 'share-ui/components/Tabs/TabPanel/TabPanel'
 import General from './panels/General'
+import Settings from './panels/Settings'
+import Logs from './panels/Logs'
 
 const PodDetails = () => {
   const [activeTab, setActiveTab] = useState(0)
@@ -29,6 +31,12 @@ const PodDetails = () => {
         <TabPanels noAnimation>
           <TabPanel>
             <General />
+          </TabPanel>
+          <TabPanel>
+            <Settings />
+          </TabPanel>
+          <TabPanel>
+            <Logs />
           </TabPanel>
         </TabPanels>
       </TabsContext>

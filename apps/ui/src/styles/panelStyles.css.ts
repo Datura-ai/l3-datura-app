@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const StyledPanelWrapper = styled.div`
-  margin-top: 30px;
+  padding-top: 30px;
+
   padding-right: 24px;
 
   display: flex;

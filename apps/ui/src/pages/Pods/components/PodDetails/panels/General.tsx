@@ -28,7 +28,7 @@ const General = () => {
                   icon={() => <StyledEditIcon />}
                   size={IconButton.sizes?.SMALL}
                   kind={IconButton.kinds?.TERTIARY}
-                  ariaLabel='Edit Template'
+                  ariaLabel='Edit Pod name'
                 />
               </StyledNameWrapper>
               <TypographySecondary value='ID: hgf6h5df1sdgffd' size='medium' />
