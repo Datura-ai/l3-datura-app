@@ -31,7 +31,7 @@ interface TextFieldProps extends L3ComponentProps {
   placeholder?: string
   /** See https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete for all of the available options */
   autoComplete?: string
-  value?: string
+  value?: string | number
   onChange?: (value: string) => void
   onBlur?: (event: React.FocusEvent) => void
   onFocus?: (event: React.FocusEvent) => void
@@ -78,6 +78,7 @@ interface TextFieldProps extends L3ComponentProps {
   name?: string
   defaultIsOpen?: boolean
   onHelpClick?: () => void
+  min?: number
 }
 
 const TextField: L3Component<TextFieldProps, unknown> & {
@@ -128,6 +129,7 @@ const TextField: L3Component<TextFieldProps, unknown> & {
       name,
       defaultIsOpen = false,
       onHelpClick,
+      min,
     },
     ref,
   ) => {
@@ -242,6 +244,7 @@ const TextField: L3Component<TextFieldProps, unknown> & {
             required={required}
             data-testid={dataTestId || getTestId(ComponentDefaultTestId.TEXT_FIELD, id)}
             tabIndex={tabIndex}
+            min={min}
           />
           {loading && (
             <div
