@@ -3,7 +3,7 @@ import getResourcesGql from 'gql/resource/getResources.gql'
 
 
 export const useGetResources = () => {
-    const { data, error, loading, refetch } = useQuery(getResourcesGql)
+    const { data, error, loading, refetch } = useQuery(getResourcesGql, { variables: { filters: {} } })
 
     try {
         if (error) {
