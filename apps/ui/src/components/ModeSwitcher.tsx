@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ModeSwitcher = () => {
   const navigate = useNavigate()
-  const { mode, setMode, options } = useAppModeContext()
+  const { mode, setMode, options, accounts } = useAppModeContext()
 
   const [isDropdownOpen, setDropdownOpen] = useState(false)
   const [showDropdownValue, setShowDropdownValue] = useState(false)
@@ -42,7 +42,7 @@ const ModeSwitcher = () => {
         </StyledSwitcher>
         {showDropdownValue && (
           <StyledDropdownContent>
-            {options.map(option => {
+            {accounts.map(option => {
               return (
                 <StyledDropDownMenuItem key={option.type} onClick={() => setMode(option)}>
                   <StyledImg src={option.icon} />
