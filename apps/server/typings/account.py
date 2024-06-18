@@ -7,6 +7,7 @@ from pydantic import UUID4, BaseModel
 
 class AccountInput(BaseModel):
     name: Optional[str]
+    configs: Optional[dict]
     deleted: Optional[bool]
 
 
@@ -29,6 +30,9 @@ class AccountOutput(BaseModel):
     modified_by: Optional[UUID4]
     configs: Optional[Dict[str, Any]]
 
+    class Config:
+        orm_mode = True
+
 
 @strawberry.type
 class Account:
@@ -38,3 +42,8 @@ class Account:
     created_by: Optional[strawberry.ID]
     modified_by: Optional[strawberry.ID]
     configs: Optional[JSONScalar]
+
+
+class AccountActionOutput(BaseModel):
+    success: bool
+    message: str
