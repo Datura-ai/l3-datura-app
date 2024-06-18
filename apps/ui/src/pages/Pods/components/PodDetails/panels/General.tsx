@@ -1,22 +1,22 @@
+import { useState } from 'react'
+
+import { StyledPanelWrapper } from 'styles/panelStyles.css'
+import { BurgerMenu, Pause, Play } from 'share-ui/components/Icon/Icons'
+import IconButton from 'share-ui/components/IconButton/IconButton'
+import styled from 'styled-components'
+
+import { StyledButtonsWrapper } from 'styles/globalStyle.css'
 import { ButtonPrimary, ButtonSecondary } from 'components/Button/Button'
 import TypographyPrimary from 'components/Typography/Primary'
 import TypographySecondary from 'components/Typography/Secondary'
 import CardWrapper from 'components/wrappers/CardWrapper'
-import { useState } from 'react'
-import { BurgerMenu, Delete, Pause, Play } from 'share-ui/components/Icon/Icons'
-import IconButton from 'share-ui/components/IconButton/IconButton'
-import styled from 'styled-components'
-import { StyledFormInputWrapper } from 'styles/formStyles.css'
-import { StyledButtonsWrapper } from 'styles/globalStyle.css'
-import { StyledDeleteIcon, StyledEditIcon } from './PodsMainCard'
+import { StyledDeleteIcon, StyledEditIcon } from 'pages/Pods/PodsMainCard'
 
-const PodDetails = () => {
+const General = () => {
   const [play, setPlay] = useState(false)
 
   return (
-    <StyledFormInputWrapper>
-      <TypographyPrimary value='Details' bold size={'large'} />
-
+    <StyledPanelWrapper>
       <CardWrapper>
         <StyledInnerWrapper>
           <StyledHeader>
@@ -76,11 +76,11 @@ const PodDetails = () => {
           </StyledFooter>
         </StyledInnerWrapper>
       </CardWrapper>
-    </StyledFormInputWrapper>
+    </StyledPanelWrapper>
   )
 }
 
-export default PodDetails
+export default General
 
 const StyledInnerWrapper = styled.div`
   display: flex;
