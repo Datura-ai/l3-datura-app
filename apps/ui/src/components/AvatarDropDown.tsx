@@ -76,7 +76,7 @@ const AvatarDropDown = () => {
           <StyledAPIIcon size={20} />
 
           <TypographyPrimary
-            value='Invite User'
+            value='Teams'
             type={TypographyTypes.P}
             size={TypographySizes.xss}
             style={{

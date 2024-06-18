@@ -542,7 +542,7 @@ export const StyledHorizontalDivider = styled.div`
 
   width: 100%;
 
-  /* margin: 8px 0; */
+  margin-top: 10px;
 `
 const StyledTableWrapper = styled.div`
   padding-right: 24px;

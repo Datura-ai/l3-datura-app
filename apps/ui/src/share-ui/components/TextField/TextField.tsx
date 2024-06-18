@@ -312,7 +312,7 @@ const TextField: L3Component<TextFieldProps, unknown> & {
           </Clickable>
         </>
         {shouldShowExtraText && (
-          <div className='input-component__sub-text-container'>
+          <StyledExtraText>
             {validation && validation.text && (
               <StyledValidationText>{validation.text}</StyledValidationText>
             )}
@@ -324,7 +324,7 @@ const TextField: L3Component<TextFieldProps, unknown> & {
                 {(inputValue && inputValue.length) || 0}
               </span>
             )}
-          </div>
+          </StyledExtraText>
         )}
       </StyledInputWrapper>
     )
@@ -345,6 +345,8 @@ const StyledInputWrapper = styled.div`
   flex-direction: column;
   gap: 5px;
   width: 100%;
+
+  position: relative;
 `
 
 const StyledInput = styled.input<{ isError: boolean; size: string }>`
@@ -407,4 +409,8 @@ const StyledValidationText = styled.span`
 const StyledLabelWrapper = styled.div`
   display: flex;
   gap: 4px;
+`
+const StyledExtraText = styled.div`
+  position: absolute;
+  bottom: -20px;
 `

@@ -9,33 +9,54 @@ import {
 } from 'routes/ChatRouteLayout'
 import { useNavigate, useOutlet } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-// import { usePod } from './usePods'
-import Loader from 'share-ui/components/Loader/Loader'
 
 import TemplateList from './TemplateList'
+import useTemplate from './useTemplate'
+
+import Loader from 'share-ui/components/Loader/Loader'
+import { StyledAbsoluteLoaderWrapper } from 'styles/formStyles.css'
 
 const TemplateLayout = () => {
   const navigate = useNavigate()
   const outlet = useOutlet()
 
-    return (
-        <StyledAppContainer>
-            <StyledContainer>
-                <StyledMainWrapper>
+  const { templates, template_loading } = useTemplate()
+
+  return (
+    <StyledAppContainer>
+      <StyledContainer>
+        <StyledMainWrapper>
+          {templates?.length === 0 && template_loading ? (
+            <StyledAbsoluteLoaderWrapper>
+              <Loader />
+            </StyledAbsoluteLoaderWrapper>
+          ) : (
+            <>
+              {templates.length > 0 && (
                 <StyledLeftColumn customWidth={400}>
-                    <Box display={'flex'} flexDirection={'column'} sx={{ paddingRight: 1.5 }} position={'relative'}>
-                        <ListHeader title={'Templates'} onAddClick={() => navigate('/templates/create-template')} />
+                  <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    sx={{ paddingRight: 1.5 }}
+                    position={'relative'}
+                  >
+                    <ListHeader
+                      title={'Templates'}
+                      onAddClick={() => navigate('/templates/create-template')}
+                    />
 
-                        <TemplateList />
-                    </Box>
+                    <TemplateList />
+                  </Box>
                 </StyledLeftColumn>
+              )}
 
-                <StyledChatWrapper>{outlet}</StyledChatWrapper>
-                </StyledMainWrapper>
-            </StyledContainer>
-        </StyledAppContainer>
-    )
+              <StyledChatWrapper>{outlet}</StyledChatWrapper>
+            </>
+          )}
+        </StyledMainWrapper>
+      </StyledContainer>
+    </StyledAppContainer>
+  )
 }
 
 export default TemplateLayout

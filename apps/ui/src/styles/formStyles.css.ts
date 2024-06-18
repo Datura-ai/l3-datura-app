@@ -27,3 +27,12 @@ export const StyledFormInputWrapper = styled.div`
 
   height: 100%;
 `
+export const StyledHeaderTextWrapper = styled.div`
+  width: 100%;
+`
+export const StyledAbsoluteLoaderWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`

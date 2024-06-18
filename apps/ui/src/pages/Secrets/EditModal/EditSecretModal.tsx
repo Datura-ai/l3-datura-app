@@ -1,59 +1,62 @@
-import withRenderModal from "hocs/withRenderModal"
-import styled from "styled-components"
+import withRenderModal from 'hocs/withRenderModal'
+import styled from 'styled-components'
 import Modal from 'share-ui/components/Modal/Modal'
-import { useModal } from "hooks"
+import { useModal } from 'hooks'
 import IconButton from 'share-ui/components/IconButton/IconButton'
 import Close from 'share-ui/components/Icon/Icons/components/Close'
-import Box from '@mui/material/Box';
-import { ButtonPrimary } from 'components/Button/Button'
+import Box from '@mui/material/Box'
+import { ButtonPrimary, ButtonSecondary } from 'components/Button/Button'
 import Button from 'share-ui/components/Button/Button'
 
-
 interface EditSecretModalProps {
-	data: {
-		handleUpdateSecret: (field: string) => void
-		field: string 
-		renderComponent: React.ReactNode
-	}
+  data: {
+    handleUpdateSecret: (field: string) => void
+    field: string
+    renderComponent: React.ReactNode
+  }
 }
 
-const EditSecretModal = ({ data: { handleUpdateSecret, field, renderComponent }  }: EditSecretModalProps) => {
-    const { closeModal } = useModal()
-    return (
-        <StyledModal
-            onClose={() => closeModal('edit-secret-modal')}
-            show
-            backgroundColor='light'
-            hideCloseButton
-        >
-            <StyledModalBody>
-                {renderComponent}
+const EditSecretModal = ({
+  data: { handleUpdateSecret, field, renderComponent },
+}: EditSecretModalProps) => {
+  const { closeModal } = useModal()
+  return (
+    <StyledModal
+      onClose={() => closeModal('edit-secret-modal')}
+      show
+      backgroundColor='light'
+      hideCloseButton
+    >
+      <StyledModalBody>
+        {renderComponent}
 
-                <StyledButtonWrapper>
-                    <IconButton
-                      size={IconButton.sizes?.XS}
-                      icon={() => <Close />}
-                      kind={IconButton.kinds?.TERTIARY}
-                      onClick={() => closeModal('edit-secret-modal')}
-                    />
-                </StyledButtonWrapper>
-                <Box alignSelf={'flex-end'} display={'flex'} width={'170px'} justifyContent={'space-between'}>
-					<ButtonPrimary
-						onClick={() => closeModal('edit-secret-modal')}
-						size={Button.sizes?.MEDIUM}
-					>
-						Cancel
-					</ButtonPrimary>
-					<ButtonPrimary
-						onClick={() => handleUpdateSecret(field)}
-						size={Button.sizes?.MEDIUM}
-					>
-						Save
-					</ButtonPrimary>
-                </Box>
-            </StyledModalBody>
-        </StyledModal>
-    )
+        <StyledButtonWrapper>
+          <IconButton
+            size={IconButton.sizes?.XS}
+            icon={() => <Close />}
+            kind={IconButton.kinds?.TERTIARY}
+            onClick={() => closeModal('edit-secret-modal')}
+          />
+        </StyledButtonWrapper>
+        <Box
+          alignSelf={'flex-end'}
+          display={'flex'}
+          width={'170px'}
+          justifyContent={'space-between'}
+        >
+          <ButtonSecondary
+            onClick={() => closeModal('edit-secret-modal')}
+            size={Button.sizes?.MEDIUM}
+          >
+            Cancel
+          </ButtonSecondary>
+          <ButtonPrimary onClick={() => handleUpdateSecret(field)} size={Button.sizes?.MEDIUM}>
+            Save
+          </ButtonPrimary>
+        </Box>
+      </StyledModalBody>
+    </StyledModal>
+  )
 }
 
 export default withRenderModal('edit-secret-modal')(EditSecretModal)
