@@ -14,6 +14,7 @@ import { StyledEditIcon } from 'pages/Pods/PodsMainCard'
 import Logs from './Logs'
 import MenuButton from 'share-ui/components/MenuButton/MenuButton'
 import { StyledMenuButtonsWrapper } from 'pages/Agents/AgentView/components/AgentViewDetailBox'
+import Utilization from './components/Utilizations'
 
 const General = () => {
   const [play, setPlay] = useState(false)
@@ -68,6 +69,8 @@ const General = () => {
 
             <StyledColumn></StyledColumn>
           </StyledBody>
+
+          <Utilization />
 
           {play && (
             <StyledLogsWrapper>
