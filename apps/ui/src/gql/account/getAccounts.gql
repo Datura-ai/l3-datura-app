@@ -1,0 +1,7 @@
+query accounts  @api(name: ai) {
+  accounts @rest(type: "Account", path: "/account", method: "GET", bodyKey: "input", endpoint: "ai") {
+    id
+    name
+    configs
+  }
+}

@@ -1,0 +1,7 @@
+mutation CreateAccount($input: input!) @api(name: ai) {
+  CreateAccount(input: $input)
+    @rest(type: "CreateAccount", path: "/account", method: "POST", bodyKey: "input", endpoint: "ai") {
+    success
+    message
+  }
+}
