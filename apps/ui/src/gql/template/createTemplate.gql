@@ -1,7 +1,14 @@
 mutation createTemplate($input: input!) @api(name: ai) {
   createTemplate(input: $input)
-    @rest(type: "CreateTemplate", path: "/template", method: "POST", bodyKey: "input", endpoint: "ai") {
+    @rest(
+      type: "CreateTemplate"
+      path: "/template"
+      method: "POST"
+      bodyKey: "input"
+      endpoint: "ai"
+    ) {
     success
     message
+    id
   }
 }

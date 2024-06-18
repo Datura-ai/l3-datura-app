@@ -31,6 +31,7 @@ import { AddOutline, BoardTemplate, DollarOutline, Locked } from 'share-ui/compo
 import ModeSwitcher from 'components/ModeSwitcher'
 import { useAppModeContext } from 'context/AppModeContext'
 import Key from 'share-ui/components/Icon/Icons/components/Key'
+import Credentials from 'share-ui/components/Icon/Icons/components/Credentials'
 
 const MainNavigation = () => {
   const { computeMode, subnetMode } = useAppModeContext()
@@ -234,16 +235,29 @@ const MainNavigation = () => {
             </StyledLi>
           </Tooltip>
         )}
+        {computeMode && (
+          <Tooltip content={t('Credentials')} position={Tooltip.positions.LEFT}>
+            <StyledLi
+              isActive={includes(active, 'credentials')}
+              onClick={() => onHandleClick('/credentials')}
+            >
+              <StyledCredentialsIcon size={30} picked={includes(active, 'credentials')} />
+              {includes(active, 'credentials') && <StyledCorner />}
+            </StyledLi>
+          </Tooltip>
+        )}
 
-        <Tooltip content={t('api-keys')} position={Tooltip.positions.LEFT}>
-          <StyledLi
-            isActive={includes(active, 'api-key')}
-            onClick={() => onHandleClick('/api-key')}
-          >
-            <StyledAPIIcon size={40} picked={includes(active, 'api-key')} />
-            {includes(active, 'api-key') && <StyledCorner />}
-          </StyledLi>
-        </Tooltip>
+        {subnetMode && (
+          <Tooltip content={t('api-keys')} position={Tooltip.positions.LEFT}>
+            <StyledLi
+              isActive={includes(active, 'api-key')}
+              onClick={() => onHandleClick('/api-key')}
+            >
+              <StyledAPIIcon size={40} picked={includes(active, 'api-key')} />
+              {includes(active, 'api-key') && <StyledCorner />}
+            </StyledLi>
+          </Tooltip>
+        )}
 
         <Tooltip content={t('Billing')} position={Tooltip.positions.LEFT}>
           <StyledLi
@@ -474,6 +488,12 @@ const StyledSecretsIcon = styled(Locked)<{ picked: boolean }>`
 `
 
 const StyledTemplateIcon = styled(BoardTemplate)<{ picked: boolean }>`
+  path {
+    fill: ${({ theme, picked }) => (picked ? '#FFF' : theme.body.iconColor)};
+    stroke: transparent;
+  }
+`
+const StyledCredentialsIcon = styled(Credentials)<{ picked: boolean }>`
   path {
     fill: ${({ theme, picked }) => (picked ? '#FFF' : theme.body.iconColor)};
     stroke: transparent;

@@ -11,10 +11,10 @@ import { useNavigate, useOutlet } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import { usePod } from './usePods'
-import Loader from 'share-ui/components/Loader/Loader'
+import { capitalizeFirstLetter } from 'share-ui/utils/capitalizeFirstLetter'
 
 const Pods = () => {
-  const { pods, pods_loading } = usePod()
+  const { pods } = usePod()
   const navigate = useNavigate()
   const outlet = useOutlet()
 
@@ -23,17 +23,18 @@ const Pods = () => {
       <StyledContainer>
         <StyledMainWrapper>
           <StyledLeftColumn customWidth={400}>
-            <Box display={'flex'} flexDirection={'column'} sx={{ paddingRight: 1.5 }} position={'relative'}>
+            <Box
+              display={'flex'}
+              flexDirection={'column'}
+              sx={{ paddingRight: 1.5 }}
+              position={'relative'}
+            >
               <ListHeader title={'Pods'} onAddClick={() => navigate('/pods/create-pod')} />
 
               {pods.map((item, index: number) => (
                 <>
-                  {pods_loading &&
-                    <Box position={'absolute'} zIndex={5} sx={{ marginTop: '15%', marginLeft: '40%' }}>
-                      <Loader size={50} />
-                    </Box>
-                  }
                   <Box
+                    onClick={() => navigate('/pods/details')}
                     key={index}
                     display={'flex'}
                     mt={1}
@@ -57,8 +58,12 @@ const Pods = () => {
                         <Typography fontSize={14} fontWeight={700}>
                           {item.pod_name}
                         </Typography>
-                        <Typography fontSize={12}>Template: {item.template_container_image}</Typography>
-                        <Typography fontSize={12}>{item.resource_display_name} - RAM {item.resource_ram} GB</Typography>
+                        <Typography fontSize={12}>
+                          Template: {item.template_container_image}
+                        </Typography>
+                        <Typography fontSize={12}>
+                          {item.resource_display_name} - RAM {item.resource_ram} GB
+                        </Typography>
                       </Box>
 
                       <Box display={'flex'} flexDirection={'column'} justifyContent={'center'}>
@@ -66,13 +71,13 @@ const Pods = () => {
                           fontSize={13}
                           fontWeight={500}
                           sx={{
-                            color: item.running ? '#17C568' : '#EF5533',
-                            background: item.running ? '#F1FEED' : '#FCEAEC',
+                            color: item.status ? '#17C568' : '#EF5533',
+                            background: item.status ? '#F1FEED' : '#FCEAEC',
                             padding: '4px 15px',
                             borderRadius: '8px',
                           }}
                         >
-                          {item.running ? 'Running' : 'Stopped'}
+                          {capitalizeFirstLetter(item.status)}
                         </Typography>
                       </Box>
                     </Box>
