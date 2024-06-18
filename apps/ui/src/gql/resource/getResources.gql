@@ -1,5 +1,5 @@
-query getResources @api(name: "ai") {
-  getResources @rest(type: "Resource", path: "/resource", method: "GET", endpoint: "ai") {
+query getResources($filters: filters) @api(name: "ai") {
+  getResources(filters: $filters) @rest(type: "Resource", path: "/resource/{args.filters}", method: "GET", endpoint: "ai") {
     id
     created_on
     name

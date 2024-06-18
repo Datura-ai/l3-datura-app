@@ -7,9 +7,20 @@ import { ButtonPrimary } from 'components/Button/Button'
 import TypographySecondary from 'components/Typography/Secondary'
 import { Option, useAppModeContext } from 'context/AppModeContext'
 
-const SelectType = ({ nextStep }: { nextStep: () => void }) => {
+interface SelectTypeProps {
+  nextStep: () => void
+  values: {
+    name: string
+    configs: {
+      account_type: Option
+    }
+  }
+  setFieldValue: (field: string, value: Option) => void
+}
+
+const SelectType = ({ nextStep, setFieldValue, values }: SelectTypeProps) => {
   const { options } = useAppModeContext()
-  const [pickedRole, setPickedRole] = useState<Option>(options[0])
+  // const [pickedRole, setPickedRole] = useState<Option>(options[0])
 
   return (
     <StyledInnerWrapper>
@@ -26,7 +37,7 @@ const SelectType = ({ nextStep }: { nextStep: () => void }) => {
           return (
             <Card
               key={data.type}
-              onClick={() => setPickedRole(data)}
+              onClick={() => setFieldValue('configs.account_type', data)}
               sx={{
                 width: '100%',
                 border: 'none',
@@ -39,8 +50,8 @@ const SelectType = ({ nextStep }: { nextStep: () => void }) => {
                 sx={{
                   boxShadow: 'none',
                   borderRadius: '10px',
-                  ...(pickedRole === data ? { backgroundColor: 'rgba(50, 50, 50, 0.1)' } : {}),
-                  ...(pickedRole === data
+                  ...(values.configs.account_type === data ? { backgroundColor: 'rgba(50, 50, 50, 0.1)' } : {}),
+                  ...(values.configs.account_type === data
                     ? { border: '1px solid #000' }
                     : { border: '1px solid transparent' }),
                 }}

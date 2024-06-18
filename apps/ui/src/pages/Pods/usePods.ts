@@ -3,6 +3,7 @@ import { useGetPods } from "services/pod/usePodService";
 import { useGetResources } from "services/resource/useResourceService";
 import { Resource } from "types/resource";
 import { useLocation } from 'react-router-dom'
+import { useFormik } from 'formik'
 
 
 const groupByType = (data: any) => {
@@ -36,10 +37,41 @@ export const usePod = () => {
 }
 
 export const useResource = () => {
-    const { data: resources } = useGetResources()
+    const { data: resources, refetch } = useGetResources()
+
+    const formik = useFormik({
+        initialValues: { 
+           cloud_type: 'Secure Cloud',
+           region: 'Any',
+           vcpu: 1,
+           ram: '8',
+           disc_type: 'ssd',
+           cuda_version: 'Any',
+           vram: 0,
+        },
+        // validationSchema: validationSchema,
+        onSubmit: values => {},
+    })
+
+    React.useEffect(() => {
+        const { values } = formik
+        refetch({
+            filters: {
+                cloud_type: values.cloud_type,
+                region: values.region,
+                ram: values.ram,
+                disc_type: values.disc_type,
+                cuda_version: values.cuda_version
+
+            }
+        })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [formik.values])
+
   
     return {
         resources: groupByType(resources),
+        formik
     }
 }
 

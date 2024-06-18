@@ -8,8 +8,20 @@ import CardWrapper from 'components/wrappers/CardWrapper'
 import TypographySecondary from 'components/Typography/Secondary'
 import { StyledHeader } from './SelectType'
 import { StyledHorizontalDivider } from 'routes/ChatRouteLayout'
+import { Option } from 'context/AppModeContext'
 
-const Configurations = () => {
+interface ConfigurationsTypeProps {
+  values: {
+    name: string
+    configs: {
+      company_website: string
+      account_type: Option
+    }
+  }
+  setFieldValue: (field: string, value: string) => void
+}
+
+const Configurations = ({ values, setFieldValue }: ConfigurationsTypeProps) => {
   return (
     <StyledConfiguration>
       <StyledInnerWrapper>
@@ -26,13 +38,24 @@ const Configurations = () => {
         <CardWrapper>
           <StyledFieldsWrapper>
             <StyledTextFieldWrapper>
-              <TypographyPrimary value='Application name' size='medium' />
-              <TextField placeholder='New app name' />
+              <TypographyPrimary 
+                value='Application name' 
+                size='medium' 
+              />
+              <TextField 
+                placeholder='New app name' 
+                value={values.name}
+                onChange={(value) => setFieldValue('name', value)}
+              />
             </StyledTextFieldWrapper>
 
             <StyledTextFieldWrapper>
               <TypographyPrimary value='Company website' size='medium' />
-              <TextField placeholder='https://example.com' />
+              <TextField 
+                placeholder='https://example.com' 
+                value={values.configs.company_website}
+                onChange={(value) => setFieldValue('configs.company_website', value)}
+              />
             </StyledTextFieldWrapper>
           </StyledFieldsWrapper>
         </CardWrapper>

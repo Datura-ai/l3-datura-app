@@ -35,6 +35,7 @@ from controllers.resource import router as resource_router
 from controllers.template import router as template_router
 from controllers.secret import router as secret_router
 from controllers.credential import router as credential_router
+from controllers.account import router as account_router
 from models import *  # noqa: F403
 from models.db import Base, engine  # noqa: F401
 from resolvers.account import AccountMutation, AccountQuery
@@ -145,6 +146,7 @@ app.include_router(resource_router, prefix="/resource", include_in_schema=False)
 app.include_router(template_router, prefix="/template", include_in_schema=False)
 app.include_router(secret_router, prefix="/secret", include_in_schema=False)
 app.include_router(credential_router, prefix="/credential", include_in_schema=False)
+app.include_router(account_router, prefix="/account", include_in_schema=False)
 
 
 @app.get("/", include_in_schema=False)

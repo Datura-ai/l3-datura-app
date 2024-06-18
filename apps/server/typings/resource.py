@@ -27,6 +27,16 @@ class ResourceCloudTypeEnum(str, Enum):
     unavailable = 'unavailable'
 
 
+class ResourceFilterInput(BaseModel):
+    status: Optional[ResourceStatusEnum] = None
+    ram: Optional[float] = None
+    max_gpu: Optional[float] = None
+    disc_type: Optional[ResourceDiscTypeEnum] = None
+    cloud_type: Optional[ResourceCloudTypeEnum] = None
+    region: Optional[str] = None
+    cuda_version: Optional[float] = None
+
+
 class ResourceInput(BaseModel):
     name: str
     display_name: str

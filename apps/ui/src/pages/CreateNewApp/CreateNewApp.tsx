@@ -12,24 +12,31 @@ import SelectType from './steps/SelectType'
 import { ButtonPrimary } from 'components/Button/Button'
 import Configurations from './steps/Configurations'
 import TypographyPrimary from 'components/Typography/Primary'
+import useCreateNewApp from './useCreateNewApp'
 
 const CreateNewApp = () => {
-  const [step, setStep] = useState(1)
+  
 
-  const nextStep = () => setStep(step + 1)
-  const prevStep = () => setStep(step - 1)
+  const { formik, step, handleSetStep } = useCreateNewApp()
 
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <SelectType nextStep={nextStep} />
+        return <SelectType 
+          nextStep={() => handleSetStep(step + 1)} 
+          values={formik.values}
+          setFieldValue={formik.setFieldValue}
+        />
       case 2:
         return (
           <>
-            <Configurations />
+            <Configurations 
+              values={formik.values}
+              setFieldValue={formik.setFieldValue}
+            />
             <StyledButtonsWrapper>
-              <ButtonPrimary onClick={prevStep}>Back</ButtonPrimary>
-              <ButtonPrimary onClick={nextStep}>Next</ButtonPrimary>
+              <ButtonPrimary onClick={() => handleSetStep(step - 1)}>Back</ButtonPrimary>
+              <ButtonPrimary onClick={() => handleSetStep(step + 1)}>Next</ButtonPrimary>
             </StyledButtonsWrapper>
           </>
         )

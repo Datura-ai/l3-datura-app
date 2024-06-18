@@ -153,7 +153,7 @@ export const temp_data = {
 }
 
 const PodsContent = () => {
-  const { resources } = useResource()
+  const { resources, formik } = useResource()
   const { resource, handleSelectResource } = usePodContent()
 
   const data_keys = Object.keys(resources)
@@ -173,7 +173,10 @@ const PodsContent = () => {
         >
           <Box>
             <Box>
-              <FilterPods />
+              <FilterPods 
+                values={formik.values}
+                handleChangeFilter={formik.setFieldValue}
+              />
             </Box>
 
             {data_keys.map((key: string, index: number) => (

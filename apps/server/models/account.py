@@ -58,11 +58,11 @@ class AccountModel(BaseModel):
         )
 
     @classmethod
-    def create_account(cls, db, account, user):
+    def create_account(cls, db, input: AccountInput, user):
         db_account = AccountModel(
             created_by=user.id,
         )
-        cls.update_model_from_input(db_account, account)
+        cls.update_model_from_input(db_account, account_input=input)
         db.session.add(db_account)
         db.session.commit()
         db.session.flush()  # Flush pending changes to generate the account's ID
@@ -93,10 +93,11 @@ class AccountModel(BaseModel):
         return account_model
 
     @classmethod
-    def get_accounts(cls, db):
+    def get_accounts(cls, db, user):
         accounts = (
             db.session.query(AccountModel)
             .filter(
+                AccountModel.created_by == user.id,
                 or_(
                     or_(
                         AccountModel.is_deleted.is_(False),

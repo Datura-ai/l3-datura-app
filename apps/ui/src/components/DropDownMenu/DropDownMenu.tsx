@@ -10,7 +10,7 @@ const buttonStyles = {
     fontWeight: 'bold',
   }
 
-export const  DropDownMenu = ({ children, buttonContent }: { children: React.ReactNode , buttonContent: any }) => {
+export const  DropDownMenu = ({ children, buttonContent, customStyles }: { children: React.ReactNode , buttonContent: any, customStyles?: any }) => {
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -28,7 +28,10 @@ export const  DropDownMenu = ({ children, buttonContent }: { children: React.Rea
         color='primary' 
         size='small'
         onClick={handleClick}
-        sx={buttonStyles}
+        sx={{
+          ...buttonStyles,
+          ...customStyles
+        }}
       >
         {buttonContent()}
       </Button>
@@ -50,7 +53,8 @@ export const  DropDownMenu = ({ children, buttonContent }: { children: React.Rea
 }
 
 export const DropDownItem = ({ handleSelect, onClick, children }: any) => {
-    return <MenuItem onClick={() => {
+    return <MenuItem
+      onClick={() => {
         handleSelect()
         onClick()
     }}>{children}</MenuItem>

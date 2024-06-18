@@ -88,7 +88,7 @@ class ResourceModel(BaseModel):
                 ))
 
     @classmethod
-    def get_resources(cls, db):
+    def get_resources(cls, db, filters):
         resources = (
             db.session.query(ResourceModel)
             .filter(
