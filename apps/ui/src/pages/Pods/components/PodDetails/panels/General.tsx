@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
 
 import { StyledPanelWrapper } from 'styles/panelStyles.css'
-import { BurgerMenu, Pause, Play } from 'share-ui/components/Icon/Icons'
+import { MenuDots, Pause, Play } from 'share-ui/components/Icon/Icons'
 import IconButton from 'share-ui/components/IconButton/IconButton'
 import styled from 'styled-components'
 
 import { StyledButtonsWrapper } from 'styles/globalStyle.css'
-import { ButtonPrimary, ButtonSecondary } from 'components/Button/Button'
+import { ButtonPrimary, ButtonTertiary } from 'components/Button/Button'
 import TypographyPrimary from 'components/Typography/Primary'
 import TypographySecondary from 'components/Typography/Secondary'
 import CardWrapper from 'components/wrappers/CardWrapper'
-import { StyledDeleteIcon, StyledEditIcon } from 'pages/Pods/PodsMainCard'
+import { StyledEditIcon } from 'pages/Pods/PodsMainCard'
 import Logs from './Logs'
+import MenuButton from 'share-ui/components/MenuButton/MenuButton'
+import { StyledMenuButtonsWrapper } from 'pages/Agents/AgentView/components/AgentViewDetailBox'
 
 const General = () => {
   const [play, setPlay] = useState(false)
@@ -75,15 +77,30 @@ const General = () => {
 
           <StyledFooter>
             <StyledButtonsWrapper>
-              <ButtonSecondary size='small'>
-                <StyledBurgerMenu />
-              </ButtonSecondary>
               <ButtonPrimary size='small' onClick={() => setPlay(!play)}>
                 {play ? <Pause /> : <Play />}
               </ButtonPrimary>
-              <ButtonSecondary size='small'>
-                <StyledDeleteIcon />
-              </ButtonSecondary>
+
+              <MenuButton
+                component={() => <StyledMenuDots />}
+                closeDialogOnContentClick
+                ariaLabel={`More actions`}
+              >
+                <StyledMenuButtonsWrapper>
+                  <ButtonTertiary onClick={() => {}} size={IconButton.sizes?.SMALL} ariaLabel={''}>
+                    Lock Pod
+                  </ButtonTertiary>
+                  <ButtonTertiary onClick={() => {}} size={IconButton.sizes?.SMALL} ariaLabel={''}>
+                    Edit Pod
+                  </ButtonTertiary>
+                  <ButtonTertiary onClick={() => {}} size={IconButton.sizes?.SMALL} ariaLabel={''}>
+                    Start Pod
+                  </ButtonTertiary>
+                  <ButtonTertiary onClick={() => {}} size={IconButton.sizes?.SMALL} ariaLabel={''}>
+                    Delete Pod
+                  </ButtonTertiary>
+                </StyledMenuButtonsWrapper>
+              </MenuButton>
             </StyledButtonsWrapper>
             <StyledPriceTag>
               <TypographyPrimary value='Start for $0.44/hr' semiBold size='medium' />
@@ -120,7 +137,7 @@ const StyledFooter = styled.footer`
   display: flex;
   justify-content: space-between;
 `
-const StyledBurgerMenu = styled(BurgerMenu)`
+const StyledMenuDots = styled(MenuDots)`
   path {
     stroke: ${({ theme }) => theme.body.iconColor};
   }
