@@ -1,45 +1,80 @@
+import { useState, useEffect } from 'react'
 import TypographyQuaternary from 'components/Typography/Quaternary'
-
 import { Download, PlayOutline, ReloadOutline } from 'share-ui/components/Icon/Icons'
 import IconButton from 'share-ui/components/IconButton/IconButton'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { StyledFormInputWrapper } from 'styles/formStyles.css'
 import { StyledPanelWrapper } from 'styles/panelStyles.css'
 
-const Logs = () => {
-  const logs = TEMP_LOGS_DATA.trim().split('\n')
+const Logs = ({ loadingLogs }: { loadingLogs?: boolean }) => {
+  const [logs, setLogs] = useState<string[]>([])
+  const [displayedLogs, setDisplayedLogs] = useState<string[]>([])
+  const [play, setPlay] = useState(loadingLogs)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const allLogs = TEMP_LOGS_DATA.trim().split('\n')
+    setLogs(allLogs)
+    if (!loadingLogs) {
+      setDisplayedLogs(allLogs) // Instantly display all logs if loadingLogs is false
+    }
+  }, [loadingLogs])
+
+  useEffect(() => {
+    if (play && loadingLogs) {
+      setLoading(true)
+      const intervalId = setInterval(() => {
+        setDisplayedLogs(currentLogs => {
+          const nextIndex = currentLogs.length
+          const nextLogs = logs.slice(nextIndex, nextIndex + 3)
+          if (nextLogs.length === 0) {
+            clearInterval(intervalId)
+            setPlay(false)
+            setLoading(false)
+            return currentLogs
+          }
+          return [...currentLogs, ...nextLogs]
+        })
+      }, 2000)
+
+      return () => {
+        clearInterval(intervalId)
+        setLoading(false)
+      }
+    }
+  }, [play, logs, loadingLogs])
 
   return (
     <StyledPanelWrapper>
-      <StyledFormInputWrapper>
+      <StyledFormInputWrapper noPadding={loadingLogs}>
         <StyledLogsContainer>
-          <StyledLogsHeader>
-            <TypographyQuaternary value='System Logs' bold size='medium' />
+          {!loadingLogs && (
+            <StyledLogsHeader>
+              <TypographyQuaternary value='System Logs' bold size='medium' />
 
-            <IconButton
-              onClick={() => {}}
-              icon={() => <ReloadOutline size={30} />}
-              size={IconButton.sizes?.SMALL}
-              kind={IconButton.kinds?.TERTIARY}
-              ariaLabel='Refresh logs'
-            />
-            <IconButton
-              onClick={() => {}}
-              icon={() => <PlayOutline size={30} />}
-              size={IconButton.sizes?.SMALL}
-              kind={IconButton.kinds?.TERTIARY}
-              ariaLabel='Tail logs'
-            />
-            <IconButton
-              onClick={() => {}}
-              icon={() => <Download size={50} />}
-              size={IconButton.sizes?.SMALL}
-              kind={IconButton.kinds?.TERTIARY}
-              ariaLabel='Download logs'
-            />
-          </StyledLogsHeader>
-
-          {logs.map((log, index) => (
+              <IconButton
+                icon={() => <PlayOutline size={30} />}
+                size={IconButton.sizes?.SMALL}
+                kind={IconButton.kinds?.TERTIARY}
+                ariaLabel='Tail logs'
+              />
+              <IconButton
+                icon={() => <ReloadOutline size={30} />}
+                size={IconButton.sizes?.SMALL}
+                kind={IconButton.kinds?.TERTIARY}
+                ariaLabel='Refresh logs'
+              />
+              <IconButton
+                onClick={() => {}}
+                icon={() => <Download size={50} />}
+                size={IconButton.sizes?.SMALL}
+                kind={IconButton.kinds?.TERTIARY}
+                ariaLabel='Download logs'
+              />
+            </StyledLogsHeader>
+          )}
+          {loading && <LinearLoader />}
+          {displayedLogs.map((log, index) => (
             <LogLine key={index}>
               <LineNumber>{index + 1}</LineNumber>
               <LogText>{log}</LogText>
@@ -93,21 +128,17 @@ const StyledLogsContainer = styled.div`
   font-family: monospace;
   display: flex;
   flex-direction: column;
-
   background-color: rgb(8, 8, 8);
   color: #d6d6d6;
   font-weight: 400;
-
   border-radius: 10px;
 `
 
 const StyledLogsHeader = styled.header`
   background-color: #333333;
-
   display: flex;
   align-items: center;
   gap: 4px;
-
   padding: 2px 14px;
 `
 
@@ -118,13 +149,36 @@ const LogLine = styled.div`
 `
 
 const LineNumber = styled.span`
-  width: 50px; // Adjust width as needed
+  width: 50px;
   color: #888;
   text-align: right;
-  padding-right: 10px; // Space between line number and log text
+  padding-right: 10px;
 `
 
 const LogText = styled.span`
   flex: 1;
-  white-space: pre-wrap; // Maintains whitespace formatting of logs
+  white-space: pre-wrap;
+`
+
+const loadAnimation = keyframes`
+  from { left: 0; }
+  to { left: 100%; }
+`
+
+const LinearLoader = styled.div`
+  margin-top: 1px;
+  height: 4px;
+  width: 100%;
+  position: relative;
+  background-color: transparent; // Make the background transparent
+  overflow: hidden; // Ensure the inner bar doesn't overflow the container
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 500px; // Maintain a constant width for the moving part
+    background-color: #ccc; // Set the color of the moving part
+    animation: ${loadAnimation} 1s infinite linear;
+  }
 `

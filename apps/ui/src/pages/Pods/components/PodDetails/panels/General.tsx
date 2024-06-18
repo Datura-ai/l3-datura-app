@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { StyledPanelWrapper } from 'styles/panelStyles.css'
 import { BurgerMenu, Pause, Play } from 'share-ui/components/Icon/Icons'
@@ -11,9 +11,20 @@ import TypographyPrimary from 'components/Typography/Primary'
 import TypographySecondary from 'components/Typography/Secondary'
 import CardWrapper from 'components/wrappers/CardWrapper'
 import { StyledDeleteIcon, StyledEditIcon } from 'pages/Pods/PodsMainCard'
+import Logs from './Logs'
 
 const General = () => {
   const [play, setPlay] = useState(false)
+
+  useEffect(() => {
+    let timer: any
+    if (play) {
+      timer = setTimeout(() => {
+        setPlay(false)
+      }, 10000) // Set play to false after 10 seconds
+    }
+    return () => clearTimeout(timer) // Clear the timer when the component unmounts or play changes
+  }, [play])
 
   return (
     <StyledPanelWrapper>
@@ -55,6 +66,13 @@ const General = () => {
 
             <StyledColumn></StyledColumn>
           </StyledBody>
+
+          {play && (
+            <StyledLogsWrapper>
+              <Logs loadingLogs />
+            </StyledLogsWrapper>
+          )}
+
           <StyledFooter>
             <StyledButtonsWrapper>
               <ButtonSecondary size='small'>
@@ -65,9 +83,6 @@ const General = () => {
               </ButtonPrimary>
               <ButtonSecondary size='small'>
                 <StyledDeleteIcon />
-              </ButtonSecondary>
-              <ButtonSecondary size='small'>
-                <TypographyPrimary value='Logs' size='small' semiBold />
               </ButtonSecondary>
             </StyledButtonsWrapper>
             <StyledPriceTag>
@@ -120,4 +135,7 @@ const StyledNameWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+`
+const StyledLogsWrapper = styled.div`
+  height: 300px;
 `

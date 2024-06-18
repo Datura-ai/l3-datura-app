@@ -9,7 +9,7 @@ import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
 import { StyledHorizontalDivider } from 'routes/ChatRouteLayout'
-import { CreditCard, Dollar } from 'share-ui/components/Icon/Icons'
+import { CreditCard } from 'share-ui/components/Icon/Icons'
 import { StyledPanelWrapper } from 'styles/panelStyles.css'
 
 const General = () => {
