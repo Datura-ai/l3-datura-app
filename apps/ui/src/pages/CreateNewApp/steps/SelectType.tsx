@@ -6,20 +6,19 @@ import { Card, CardActionArea } from '@mui/material'
 import { ButtonPrimary } from 'components/Button/Button'
 import TypographySecondary from 'components/Typography/Secondary'
 import { Option, useAppModeContext } from 'context/AppModeContext'
+import { MODE_OPTIONS } from '../useCreateNewApp'
 
 interface SelectTypeProps {
   nextStep: () => void
   values: {
     name: string
-    configs: {
-      account_type: Option
-    }
+    configs: Option
   }
   setFieldValue: (field: string, value: Option) => void
 }
 
 const SelectType = ({ nextStep, setFieldValue, values }: SelectTypeProps) => {
-  const { options } = useAppModeContext()
+  // const { options } = useAppModeContext()
   // const [pickedRole, setPickedRole] = useState<Option>(options[0])
 
   return (
@@ -33,11 +32,11 @@ const SelectType = ({ nextStep, setFieldValue, values }: SelectTypeProps) => {
       </StyledHeader>
 
       <StyledCardsWrapper>
-        {options.map(data => {
+        {MODE_OPTIONS.map(data => {
           return (
             <Card
               key={data.type}
-              onClick={() => setFieldValue('configs.account_type', data)}
+              onClick={() => setFieldValue('configs', data)}
               sx={{
                 width: '100%',
                 border: 'none',
@@ -50,8 +49,8 @@ const SelectType = ({ nextStep, setFieldValue, values }: SelectTypeProps) => {
                 sx={{
                   boxShadow: 'none',
                   borderRadius: '10px',
-                  ...(values.configs.account_type === data ? { backgroundColor: 'rgba(50, 50, 50, 0.1)' } : {}),
-                  ...(values.configs.account_type === data
+                  ...(values.configs === data ? { backgroundColor: 'rgba(50, 50, 50, 0.1)' } : {}),
+                  ...(values.configs === data
                     ? { border: '1px solid #000' }
                     : { border: '1px solid transparent' }),
                 }}

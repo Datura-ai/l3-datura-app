@@ -15,6 +15,7 @@ import uuid
 from typings.pod import PodStatusEnum, PodTypeEnum
 from models.template import TemplateModel
 from models.resource import ResourceModel
+from exceptions import PodNotFoundException
 
 
 class PodModel(BaseModel):
@@ -174,3 +175,45 @@ class PodModel(BaseModel):
         )
 
         return pods
+
+    @classmethod
+    def pod_by_id(cls, db, pod_id, account):
+        pod = (
+            db.session.query(PodModel)
+            .filter(
+                PodModel.id == pod_id,
+                PodModel.account_id == account.id,
+                or_(
+                    or_(
+                        PodModel.is_deleted.is_(False),
+                        PodModel.is_deleted is None,
+                    ),
+                    PodModel.is_deleted is None,
+                ),
+            )
+            .first()
+        )
+
+        return pod
+
+    @classmethod
+    def delete_pod(
+        cls,
+        db,
+        pod_id,
+        account
+    ):
+        pod = (
+            db.session.query(PodModel)
+            .filter(
+                PodModel.id == pod_id,
+                PodModel.account_id == account.id
+            )
+            .first()
+        )
+
+        if not pod or pod.is_deleted:
+            raise PodNotFoundException("Pod not found")
+
+        pod.is_deleted = True
+        db.session.commit()
