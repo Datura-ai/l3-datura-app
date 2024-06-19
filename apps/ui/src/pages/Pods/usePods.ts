@@ -44,7 +44,7 @@ export const useResource = () => {
            cloud_type: 'Secure Cloud',
            region: 'Any',
            vcpu: 1,
-           ram: '8',
+           ram: '100',
            disc_type: 'ssd',
            cuda_version: 'Any',
            vram: 0,
@@ -55,15 +55,15 @@ export const useResource = () => {
 
     React.useEffect(() => {
         const { values } = formik
+        const filters = {
+            cloud_type: values.cloud_type.toLowerCase(),
+            ...(values.region !== 'Any' && { region: values.region, }),
+            ...(values.cuda_version !== 'Any' && { cuda_version: values.cuda_version, }),
+            ram: values.ram,
+            disc_type: values.disc_type.toLowerCase(),
+        }
         refetch({
-            filters: {
-                cloud_type: values.cloud_type,
-                region: values.region,
-                ram: values.ram,
-                disc_type: values.disc_type,
-                cuda_version: values.cuda_version
-
-            }
+            filters
         })
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [formik.values])

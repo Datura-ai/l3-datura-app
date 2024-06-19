@@ -17,7 +17,7 @@ import useCreateNewApp from './useCreateNewApp'
 const CreateNewApp = () => {
   
 
-  const { formik, step, handleSetStep } = useCreateNewApp()
+  const { formik, step, handleSetStep, create_account_loading } = useCreateNewApp()
 
   const renderStep = () => {
     switch (step) {
@@ -36,7 +36,12 @@ const CreateNewApp = () => {
             />
             <StyledButtonsWrapper>
               <ButtonPrimary onClick={() => handleSetStep(step - 1)}>Back</ButtonPrimary>
-              <ButtonPrimary onClick={() => handleSetStep(step + 1)}>Next</ButtonPrimary>
+              <ButtonPrimary 
+                onClick={() => handleSetStep(step + 1)}
+                loading={create_account_loading}
+              >
+                  Next
+              </ButtonPrimary>
             </StyledButtonsWrapper>
           </>
         )
@@ -54,18 +59,18 @@ const CreateNewApp = () => {
           <StyledChatWrapper>
             <StyledRoot>
               <StyledHeader>
-                <StyledButton picked={step === 1} onClick={() => setStep(1)}>
+                <StyledButton picked={step === 1} onClick={() => handleSetStep(1)}>
                   <TypographyPrimary value='Select App type' bold={step === 1} />
                 </StyledButton>
 
                 <StyledDividerLine />
 
-                <StyledButton picked={step === 2} onClick={() => setStep(2)}>
+                <StyledButton picked={step === 2} onClick={() => handleSetStep(2)}>
                   <TypographyPrimary value='Configuration' bold={step === 2} />
                 </StyledButton>
                 <StyledDividerLine />
 
-                <StyledButton picked={step === 3} onClick={() => setStep(3)}>
+                <StyledButton picked={step === 3} onClick={() => handleSetStep(3)}>
                   <TypographyPrimary value='Get Started' bold={step === 3} />
                 </StyledButton>
               </StyledHeader>

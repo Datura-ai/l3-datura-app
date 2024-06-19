@@ -25,7 +25,7 @@ const useApollo = () => {
     // credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
-      account_id: account_id,
+      account_id: account_id || 'undefined',
     },
   }
 
@@ -33,7 +33,7 @@ const useApollo = () => {
     headers: {
       // 'x-refresh-token': refreshToken,
       authorization: `Bearer ${authorization}`,
-      account_id: account_id,
+      account_id: account_id || 'undefined',
     },
   }
 

@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { useGetAccounts } from 'services/Account/useAccountService'
 import { setAccountId, removeAccountId } from 'helpers/authHelper'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 type AppModeContextType = {
   mode: Option
@@ -31,12 +32,23 @@ type AppModeContextProviderProps = {
 }
 
 export function AppModeContextProvider({ children }: AppModeContextProviderProps): JSX.Element {
-  const { data: accounts } = useGetAccounts()
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const { data: accounts, refetch: refetchAccounts } = useGetAccounts()
 
   const [mode, setMode] = useState<Option>(() => {
     const savedMode = localStorage.getItem('appModeStorage')
     return savedMode ? JSON.parse(savedMode) : null
   })
+
+  useEffect(()=> {
+    if(location.pathname === '/create-new-app' && location?.state?.need_refetch) {
+      refetchAccounts()
+      navigate(location.pathname, { state: {} })
+    }
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [location])
 
   useEffect(() => {
     if (accounts && accounts.length > 0 && !mode) {
@@ -47,7 +59,7 @@ export function AppModeContextProvider({ children }: AppModeContextProviderProps
       }
       setMode(newMode)
       localStorage.setItem('appModeStorage', JSON.stringify(newMode))
-      // setAccountId(newMode.id)
+      setAccountId(newMode.id)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accounts])
@@ -58,7 +70,7 @@ export function AppModeContextProvider({ children }: AppModeContextProviderProps
   const saveModeToLocal = (newMode: Option) => {
     localStorage.setItem('appModeStorage', JSON.stringify(newMode))
     setMode(newMode)
-    // setAccountId(newMode.id)
+    setAccountId(newMode.id)
   }
 
   const accountOptions = accounts.map((account: any) => ({ 
@@ -72,7 +84,7 @@ export function AppModeContextProvider({ children }: AppModeContextProviderProps
     setMode: saveModeToLocal,
     computeMode,
     subnetMode,
-    accounts: accountOptions
+    accounts: accountOptions,
   }
 
   return <AppModeContext.Provider value={value}>{children}</AppModeContext.Provider>
