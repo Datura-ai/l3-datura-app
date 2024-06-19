@@ -6,6 +6,8 @@ from models.account import AccountModel
 from typings.account import AccountInput, AccountOutput, AccountActionOutput
 from models.user_account_access import UserAccountAccessModel
 from typings.user_account_access import UserAccountAccessDbInput
+from models.user_account import UserAccountModel
+from typings.user_account import UserAccountInput
 
 router = APIRouter()
 
@@ -21,17 +23,25 @@ def create_account(
             input=input,
             user=auth.user
         )
-        
+
         db_access = UserAccountAccessDbInput(
             assigned_user_id=auth.user.id,
             assigned_account_id=account.id
         )
-        
+
         UserAccountAccessModel.create_user_account_access(
             db=db,
             user_account_access=db_access,
             user=auth.user,
             account_id=account.id
+        )
+
+        user_account_input = UserAccountInput(
+            user_id=auth.user.id,
+            account_id=account.id
+        )
+        UserAccountModel.create_user_account(
+            db=db, user_account=user_account_input
         )
 
         if not account:

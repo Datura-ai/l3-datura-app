@@ -8,7 +8,7 @@ export const setAccountId = (accountId?: string) => {
   cookies.set('account_id', accountId, {
     path: '/',
   })
-  // cookies.addChangeListener(history.go(0))
+  cookies.addChangeListener(history.go(0))
 }
 
 export const setTokens = (data: any) => {

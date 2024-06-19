@@ -5,6 +5,7 @@ from typings.auth import UserAccount
 from models.resource import ResourceModel
 from typings.resource import ResourceOutput, ResourceInput, ResourceFilterInput
 from typing import Optional
+from urllib.parse import parse_qs
 
 router = APIRouter()
 
@@ -24,8 +25,8 @@ def get_resources(filters: str):
         _type_: _description_
     """
     try:
-        print('filters', filters)
-        data = ResourceModel.get_resources(db=db, filters={})
+        filters = {k: v[0] for k, v in parse_qs(filters).items()}
+        data = ResourceModel.get_resources(db=db, filters=filters)
 
         data_to_list = [ResourceOutput.from_orm(resource) for resource in data]
 

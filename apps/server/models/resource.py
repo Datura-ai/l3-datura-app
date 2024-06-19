@@ -89,19 +89,39 @@ class ResourceModel(BaseModel):
 
     @classmethod
     def get_resources(cls, db, filters):
-        resources = (
-            db.session.query(ResourceModel)
-            .filter(
-                or_(
-                    or_(
-                        ResourceModel.is_deleted.is_(False),
-                        ResourceModel.is_deleted is None,
-                    ),
-                    ResourceModel.is_deleted is None,
-                ),
+        print('filters', filters)
+        # resources = (
+        #     db.session.query(ResourceModel)
+        #     .filter(
+        #         or_(
+        #             or_(
+        #                 ResourceModel.is_deleted.is_(False),
+        #                 ResourceModel.is_deleted is None,
+        #             ),
+        #             ResourceModel.is_deleted is None,
+        #         ),
+        #     )
+        #     .all()
+        # )
+        query = db.session.query(ResourceModel).filter(
+            or_(
+                ResourceModel.is_deleted.is_(False),
+                ResourceModel.is_deleted.is_(None),
             )
-            .all()
         )
+        
+        if filters.get('cloud_type'):
+            query = query.filter(ResourceModel.cloud_type == filters['cloud_type'])
+        if filters.get('region'):
+            query = query.filter(ResourceModel.region == filters['region'])
+        if filters.get('ram'):
+            query = query.filter(ResourceModel.ram <= filters['ram'])
+        if filters.get('disc_type'):
+            query = query.filter(ResourceModel.disc_type == filters['disc_type'])
+        if filters.get('cuda_version'):
+            query = query.filter(ResourceModel.cuda_version == filters['cuda_version'])
+        
+        resources = query.all()
 
         return resources
 
