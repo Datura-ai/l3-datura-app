@@ -20,6 +20,7 @@ from utils.user_account_access import (
     convert_user_access_to_list,
     shared_user_access_to_list
 )
+from services.aws_ses import send_email
 
 router = APIRouter()
 
@@ -60,6 +61,13 @@ def create_user_account_access(
             })
 
             response = auth_service.register(input=user_input)
+
+            # send_email(
+            #     to=body['email'],
+            #     subject='Welcome to L3',
+            #     body_text=f'Your password is: {random_pass}'
+            # )
+
             create_user_account_access_input = UserAccountAccessDbInput(
                 assigned_user_id=response['user'].id,
                 assigned_account_id=response['account'].id
