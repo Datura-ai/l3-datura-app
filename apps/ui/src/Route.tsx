@@ -116,7 +116,7 @@ import Billing from 'pages/Billing'
 import CreateNewApp from 'pages/CreateNewApp'
 import { Secrets, CreateSecret, SecretDetails } from 'pages/Secrets'
 import Credentials from 'pages/Credentials'
-import PodDetails from 'pages/Pods/PodDetails'
+import PodDetails from 'pages/Pods/components/PodDetails'
 
 const Route = () => {
   const { loading } = useContext(AuthContext)

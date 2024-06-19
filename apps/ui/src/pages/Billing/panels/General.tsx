@@ -9,11 +9,12 @@ import ToggleButton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
 import { StyledHorizontalDivider } from 'routes/ChatRouteLayout'
-import { CreditCard, Dollar } from 'share-ui/components/Icon/Icons'
+import { CreditCard } from 'share-ui/components/Icon/Icons'
+import { StyledPanelWrapper } from 'styles/panelStyles.css'
 
 const General = () => {
   return (
-    <StyledRoot>
+    <StyledPanelWrapper>
       <CardWrapper>
         <StyledContentContainer>
           <StyledHeader>
@@ -106,25 +107,11 @@ const General = () => {
           </StyledBody>
         </StyledContentContainer>
       </CardWrapper>
-    </StyledRoot>
+    </StyledPanelWrapper>
   )
 }
 export default General
 
-const StyledRoot = styled.div`
-  margin-top: 30px;
-  padding-right: 24px;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 50px;
-
-  overflow: auto;
-
-  height: 100%;
-  width: 100%;
-`
 const StyledContentContainer = styled.div`
   display: flex;
   flex-direction: column;
