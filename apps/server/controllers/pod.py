@@ -89,3 +89,43 @@ def get_by_id(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e)
         )
+
+
+@router.delete(
+    "/{pod_id}",
+    response_model=CreatePodOutput,
+    status_code=201
+)
+def delete_pod(
+    pod_id: str,
+    auth: UserAccount = Depends(authenticate)
+):
+    """
+    Deletes a pod based on the provided pod_id and authenticated user account.
+
+    Parameters:
+        - pod_id (str): The ID of the pod to be deleted.
+        - auth (UserAccount, optional): The authenticated user account. Defaults to the result of the authenticate function.
+
+    Returns:
+        dict: A dictionary indicating the success of the deletion with keys:
+            - success (bool): Indicates if the deletion was successful.
+            - message (str): A message indicating the result of the deletion.
+    """
+    try:
+        PodModel.delete_pod(
+            db=db,
+            pod_id=pod_id,
+            account=auth.account
+        )
+
+        return {
+                "success": True,
+                "message": "Pod deleted successfully"
+            }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
