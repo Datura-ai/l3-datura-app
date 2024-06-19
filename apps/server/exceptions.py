@@ -172,3 +172,7 @@ class SecretNotFoundException(DatasourceException):
 
 class CredentialNotFoundException(DatasourceException):
     pass
+
+
+class PodNotFoundException(DatasourceException):
+    pass

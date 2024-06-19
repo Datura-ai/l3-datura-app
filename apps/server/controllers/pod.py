@@ -4,6 +4,7 @@ from utils.auth import authenticate
 from typings.auth import UserAccount
 from models.pod import PodModel
 from typings.pod import PodOutput, PodInput, CreatePodOutput
+from exceptions import PodNotFoundException
 
 router = APIRouter()
 
@@ -54,6 +55,34 @@ def create_pod(input: PodInput, auth: UserAccount = Depends(authenticate)):
                 "success": True,
                 "message": "Pod created successfully"
             }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
+
+
+@router.get(
+    "/{pod_id}",
+    response_model=PodOutput,
+    status_code=200
+)
+def get_by_id(
+    pod_id: str,
+    auth: UserAccount = Depends(authenticate)
+):
+    try:
+        pod = PodModel.pod_by_id(
+            db=db,
+            pod_id=pod_id,
+            account=auth.account
+        )
+
+        return PodOutput.from_orm(pod)
+
+    except PodNotFoundException:
+        raise HTTPException(status_code=404, detail="Pod not found")
 
     except Exception as e:
         raise HTTPException(

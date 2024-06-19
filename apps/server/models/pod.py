@@ -174,3 +174,23 @@ class PodModel(BaseModel):
         )
 
         return pods
+
+    @classmethod
+    def pod_by_id(cls, db, pod_id, account):
+        pod = (
+            db.session.query(PodModel)
+            .filter(
+                PodModel.id == pod_id,
+                PodModel.account_id == account.id,
+                or_(
+                    or_(
+                        PodModel.is_deleted.is_(False),
+                        PodModel.is_deleted is None,
+                    ),
+                    PodModel.is_deleted is None,
+                ),
+            )
+            .first()
+        )
+
+        return pod
